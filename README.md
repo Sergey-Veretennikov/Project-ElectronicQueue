@@ -10,7 +10,7 @@ Damir Almuhamedov
 
 Sergej Kashenkov
 
-Mikhail
+Mikhail Nekhoroshev
 
 
 [![Build Status](https://travis-ci.org/Sergey-Veretennikov/Innopolis-Java-stc12-LaboratoryWork.svg?branch=develop)](https://travis-ci.org/Sergey-Veretennikov/Innopolis-Java-stc12-LaboratoryWork)
