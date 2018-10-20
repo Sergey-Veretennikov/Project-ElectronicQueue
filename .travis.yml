@@ -44,4 +44,5 @@ notifications:
     recipients:
     - oz-15@mail.ru
     - nekhoroshevmv@gmail.com
+    - kashenkovsergej@yandex.ru
     on_success: always # default: change
