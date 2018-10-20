@@ -13,5 +13,5 @@ Sergej Kashenkov
 Mikhail Nekhoroshev
 
 
-[![Build Status](https://travis-ci.org/Sergey-Veretennikov/Innopolis-Java-stc12-LaboratoryWork.svg?branch=develop)](https://travis-ci.org/Sergey-Veretennikov/Innopolis-Java-stc12-LaboratoryWork)
+[![Build Status](https://travis-ci.org/Sergey-Veretennikov/Project-ElectronicQueue.svg?branch=develop)](https://travis-ci.org/Sergey-Veretennikov/Project-ElectronicQueue)
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=stc12-LaboratoryWork%3Adevelop&metric=alert_status)](https://sonarcloud.io/organizations/sergey-veretennikov-github/projects)
