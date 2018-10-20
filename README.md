@@ -14,4 +14,4 @@ Mikhail Nekhoroshev
 
 
 [![Build Status](https://travis-ci.org/Sergey-Veretennikov/Project-ElectronicQueue.svg?branch=develop)](https://travis-ci.org/Sergey-Veretennikov/Project-ElectronicQueue)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=ElectronicQueue&metric=alert_status)](https://sonarcloud.io/organizations/sergey-veretennikov-github/projects)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=ElectronicQueue&metric=alert_status)](https://sonarcloud.io/dashboard?id=ElectronicQueue)
