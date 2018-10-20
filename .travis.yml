@@ -31,9 +31,9 @@ cache:
   #    secure: $SONARCLOUD_TOKEN
 
 script:
-- ./gradlew assemble
-- ./gradlew check --rerun-tasks
-- ./gradlew clean build
+#- ./gradlew assemble
+#- ./gradlew check --rerun-tasks
+#- ./gradlew clean build
 #- ./gradlew clean build sonarqube -s
 #- ./gradlew build --scan -s
 #- sonar-scanner
