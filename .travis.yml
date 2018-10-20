@@ -38,3 +38,9 @@ script:
 #- ./gradlew build --scan -s
 #- sonar-scanner
 #- rm -rf .scannerwork
+
+notifications:
+  email:
+    recipients:
+    - oz-15@mail.ru
+    on_success: always # default: change
