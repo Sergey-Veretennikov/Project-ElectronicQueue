@@ -5,8 +5,11 @@
 **Курсовая работа - Проект "Электронная очередь"**
 
 Sergey Veretennikov (Сергей Веретенников)
+
 Damir Almuhamedov
+
 Sergej Kashenkov
+
 Mikhail
 
 
