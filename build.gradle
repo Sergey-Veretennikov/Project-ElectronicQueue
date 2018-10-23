@@ -24,6 +24,8 @@ test {
                     "${result.skippedTestCount} skipped) ")
     }
 }
+task stage() {
+}
 
 dependencies {
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.0-M1'
