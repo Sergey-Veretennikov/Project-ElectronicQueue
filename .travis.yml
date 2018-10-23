@@ -15,6 +15,12 @@ branches:
   - develop
   - master
 
+deploy:
+    provider: heroku
+    api_key: $HEROKU_API_KEY
+    on:
+      all_branches: true
+
 before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
