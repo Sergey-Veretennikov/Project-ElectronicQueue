@@ -16,6 +16,7 @@ deploy:
     secure: Rq7TqR6/qPR5Aa/cs2XghW1ZKvVrdpASQANxmcFP8T/Ykgbu+LsZzEVMq3rNZLe/0Y5Zi6RdhUWeoWmz2PMGooYsYZK78HC+jvaMxW///Yt8v7MRxbV0tR/W803NRssGbriBFETBkUSwQevChMBqSjC040fZMCNJFFzhJfS2DIzb16vRSLS0Zco1qonDdAbR4/vf0ocQ9FVGF66xHaczbGqduijW0F8KSApABy2beU3MJ5XfxMEWER25A5P8ZhbteYaEW7WkH3wmruCC95DtdiYuZeRun/Bcm08TSCac625y+EVf2KijWJixIzjylEjtGJM1LvNM9ghH/OsIKAQK/zXt7VrdS85dNUflLXdSHQNDknIlWPa8l0n5S2gbagW+mXnH/SnPPdH8YF3cIRDozbH54JNe/uq/9C8XxWnQMO+uRapUEIiWMTHHTj0UfVWcVbQBMnDlE5eLRaMiJnHGHpy3HhJSlPpJuuSDt2fU1k6rBvcj/jARfCib3w50XIZhAdadVIc+Zp84lyUgfxYRmzc37Rj1Ib+l/aq3Niig//wWXgHVSJ3E2gca7bGwkfVs7pwoa5vIiFV6laaCDKAfpMvrHXQfxpQ994D+2hNJKxbKznk6go8xUHi841p2jCohW036BKJvf/nVupR/KGTp91/w5oW2pCxJOX1yccBLZT8=
   on:
     all_branches: true
+  app: electronicqueue
 before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
