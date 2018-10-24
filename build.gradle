@@ -24,11 +24,24 @@ test {
                     "${result.skippedTestCount} skipped) ")
     }
 }
+
 task stage() {
+    dependsOn clean, war
 }
+war.mustRunAfter clean
+
+task copyToLib(type: Copy) {
+    into "$buildDir/server"
+    from(configurations.compile) {
+        include "webapp-runner*"
+    }
+}
+
+stage.dependsOn(copyToLib)
 
 dependencies {
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.0-M1'
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.10.0'
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.10.0'
+	compile 'com.github.jsimone:webapp-runner:8.5.11.3'
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
 }
