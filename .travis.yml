@@ -13,7 +13,7 @@ branches:
 deploy:
   provider: heroku
   api_key:
-    secure: "$HEROKU_API_KEY"
+    secure: "nVjt5twEp7O3rnzQCWQX9FArXwHXPrclnWYju18KHlr4wI8lHzuxA8toA5S2PJpxK7/6M4EWBZZqXTFQl9mEXl5yUrlccG1JcO3icmKLQ/23OmnPcoA8BRcQL9wlKE7ucUgBGmO1ru9492E/uZlIsmkeMKlyDkZ8VDpwS8B9mh/MsGtLb4bAYhFZcxxBgeJJYUlA0vyQb/0Ix4XvgQOSwuqEhXdrBZMpLICMf7FArPkXU4cQSlYVS0WHPkdiUIxbLvIotmWi9Ik9puSyESroJuXy+xjFeWGMHW9haEqGk19VxGc/wgQd/0cWSIfFeUu+KQ3IQhOERJKw/s6DWuvWlfhGmdZqeWauCNFC+DzOQQwW7e1/FkDMwgRw2y8P9XU/x7NVfVpU5nVSmG5NbJnAo/+/izCVaNFOw8UgSffJn/FBJdkH7gJ3Dfwwj3PXaxijQjr69z+KTKgLp2JZNmfTFZDxdzl/DTsGMfS78+thhmRZIkedrvJuYK1eKtfEwhBB7CHY5B7zGB4Vxn03CadAJSU4kXLdAKeAdG/VrNt14qCIQK5yJio2du95QGE78e/ZO2Bh8trvtWWaqbwM7u2oQ+u1SSInYD7J//fxRDZ6jhMt7sE1mdo3mhZiYQiMhKv9JR9W9vO0FdpvIk1AHGcTghmuAYvwFjngDlUpmO5hFHk="
   on:
     all_branches: true
   app: electronicqueue
