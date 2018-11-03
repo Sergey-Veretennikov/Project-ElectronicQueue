@@ -8,6 +8,7 @@ os:
 - linux
 branches:
   only:
+  - liquibaseAdding
   - develop
   - master
 deploy:
