@@ -54,10 +54,15 @@
         <h2 class="form-signin-heading">Пожалуйста, зарегистрируйтесь</h2>
         <input type="email" name="login" class="form-control" placeholder="Email address" required autofocus>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
-        <label class="checkbox">
-            <input type="checkbox" value="remember-me" name="_spring_security_remember_me"> Запомнить меня
-        </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Login">Войти</button>
+        <label for="sel1">Выберите полномочия:</label>
+        <select class="form-control" name="role" id="sel1">
+            <option value="ROLE_USER">Пользователь</option>
+            <option value="ROLE_OPERATOR">Оператор</option>
+            <option value="ROLE_HEAD_OPERATOR">Руководитель оператора</option>
+            <option value="ROLE_ADMIN">Администратор</option>
+        </select>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Login">Зарегистрироваться</button>
     </form>
 
 </div> <!-- /container -->

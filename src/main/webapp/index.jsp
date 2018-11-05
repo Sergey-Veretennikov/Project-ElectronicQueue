@@ -12,11 +12,17 @@
 </head>
 <body>
 <a href="/login">Login</a><br>
+<br>
 <a href="/logoutpage">Logout page</a><br>
+<br>
 <a href="/registrationpage">Registration page</a><br>
+<br>
 <a href="/userpage">User page</a><br>
+<br>
 <a href="/operatorpage">Operator page</a><br>
+<br>
 <a href="/headoperatorspage">Head of operators page</a><br>
+<br>
 <a href="/adminpage">Admin page</a><br>
 </body>
 </html>

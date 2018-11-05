@@ -22,8 +22,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void addUser(String login, String password) {
+    public void addUser(String login, String password, String role) {
         String cryptPassword = bCryptPasswordEncoder.encode(password);
-        userDao.addUser(login, cryptPassword);
+        userDao.addUser(login, cryptPassword, role);
     }
 }
