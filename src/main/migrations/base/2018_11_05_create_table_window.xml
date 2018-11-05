@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    
+    <changeSet id="2018-10-22-create-table-window" author="kashenkov">
+        
+        <!--Создание таблицы окна-->
+        <createTable tableName="window" remarks="Окна">
+            <column name="number_window" remarks="Номер окна" type="integer">
+                <constraints
+                        nullable="false"
+                        primaryKey="true"
+                        primaryKeyName="window_pkey"/>
+            </column>   
+            <column name="id_operator" type="integer">
+                <constraints nullable="false"
+                             unique="false" />
+            </column>
+            <column name="id_queue" type="integer">
+                <constraints nullable="false"
+                             unique="false" />
+            </column>
+
+        </createTable>
+        
+        <!--Создание таблицы операторов-->
+        <createTable tableName="operator" remarks="Операторы">
+            <column name="operator_id" type = "integer">
+                <constraints
+                        nullable="false"
+                        primaryKey="true"
+                        primaryKeyName="operator_pkey"/>
+            </column>
+            <column name="name_operator" type="varchar(32)">
+                <constraints nullable="false"
+                             unique="true" />
+            </column>
+            <column name="login" type="varchar(32)">
+                <constraints nullable="false"
+                             unique="true" />
+            </column>
+            <column name="password" type="varchar(64)">
+                <constraints nullable="false"
+                             unique="true" />
+            </column>
+            <column name="role" type="varchar(32)"/>
+            <column name="age" type="integer"/>
+            <column name="contact" type="varchar(32)"/>
+        </createTable>
+
+        <!--Создание таблицы очереди-->
+        <createTable tableName="queue" remarks="Очередь">
+            <column name="client_id" remarks="Номер клиента" type="integer">
+                <constraints
+                        nullable="false"
+                        primaryKey="true"
+                        primaryKeyName="queue_pkey"/>
+            </column>
+            <column name="number_window" type="integer">
+                <constraints nullable="false"
+                             unique="false" />
+            </column>
+            <column name="number_service" type="integer">
+                <constraints nullable="false"
+                             unique="false" />
+            </column>
+        </createTable>
+
+        <!--Создание таблицы услуг-->
+        <createTable tableName="service" remarks="Очередь">
+            <column name="service_id" remarks="Номер услуги" type="integer">
+                <constraints
+                        nullable="false"
+                        primaryKey="true"
+                        primaryKeyName="service_pkey"/>
+            </column>
+            <column name="name_service" type="varchar(32)"/>
+            <column name="average_lead_time" type="integer"/>
+            <column name="operator_id" type="integer">
+                <constraints nullable="false"
+                             unique="false" />
+            </column>
+        </createTable>
+
+        <!--Создание таблицы категорий услуг-->
+        <createTable tableName="category_service" remarks="Категории сервисов">
+            <column name="category_id" remarks="Номер категории" type="integer">
+                <constraints
+                        nullable="false"
+                        primaryKey="true"
+                        primaryKeyName="category_pkey"/>
+            </column>
+            <column name="name_category" type="varchar(32)"/>
+            <column name="service_id" type="integer">
+                <constraints nullable="false"
+                             unique="false" />
+            </column>
+        </createTable>
+
+        <!--Создание таблицы администраторов-->
+        <createTable tableName="administrator" remarks="Администраторы">
+            <column name="administrator_id" remarks="Номер администратора" type="integer">
+                <constraints
+                        nullable="false"
+                        primaryKey="true"
+                        primaryKeyName="administrator_pkey"/>
+            </column>
+            <column name="name_administrator" type="varchar(32)"/>
+            <column name="login" type="varchar(32)">
+                <constraints nullable="false"
+                             unique="true" />
+            </column>
+            <column name="password" type="varchar(64)">
+                <constraints nullable="false"
+                             unique="true" />
+            </column>
+            <column name="role" type="varchar(32)"/>
+            <column name="age" type="integer"/>
+            <column name="contact" type="varchar(32)"/>
+            <column name="operator_id" type="integer">
+                <constraints nullable="false"
+                             unique="false" />
+            </column>
+        </createTable>
+
+        <!--Создание таблицы начальников-->
+        <createTable tableName="chief" remarks="Начальники">
+            <column name="chief_id" remarks="Номер начальника" type="integer">
+                <constraints
+                        nullable="false"
+                        primaryKey="true"
+                        primaryKeyName="chief_pkey"/>
+            </column>
+            <column name="name_chief" type="varchar(32)"/>
+            <column name="login" type="varchar(32)">
+                <constraints nullable="false"
+                             unique="true" />
+            </column>
+            <column name="password" type="varchar(64)">
+                <constraints nullable="false"
+                             unique="true" />
+            </column>
+            <column name="role" type="varchar(32)"/>
+            <column name="contact" type="varchar(32)"/>
+            <column name="operator_id" type="integer">
+                <constraints nullable="false"
+                             unique="false" />
+            </column>
+            <column name="administrator_id" type="integer">
+                <constraints nullable="false"
+                             unique="false" />
+            </column>
+            <column name="service_id" type="integer">
+                <constraints nullable="false"
+                             unique="false" />
+            </column>
+            <column name="category_id" type="integer">
+                <constraints nullable="false"
+                             unique="false" />
+            </column>
+            <column name="queue_id" type="integer">
+                <constraints nullable="false"
+                             unique="false" />
+            </column>
+        </createTable>
+
+
+
+        <!--Объединение таблиц окон и операторов-->
+        <addForeignKeyConstraint baseTableName="window"
+                                 baseColumnNames="id_operator"
+                                 constraintName="fk_window_operator_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="operator"
+                                 referencedColumnNames="operator_id"/>
+        <!--Объединение таблиц окон и очереди-->
+        <addForeignKeyConstraint baseTableName="window"
+                                 baseColumnNames="id_queue"
+                                 constraintName="fk_window_queue_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="queue"
+                                 referencedColumnNames="client_id"/>
+        <!--Объединение таблиц услуги и очереди-->
+        <addForeignKeyConstraint baseTableName="queue"
+                                 baseColumnNames="number_service"
+                                 constraintName="fk_queue_service_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="service"
+                                 referencedColumnNames="service_id"/>
+        <!--Объединение таблиц услуги и категории-->
+        <addForeignKeyConstraint baseTableName="category_service"
+                                 baseColumnNames="service_id"
+                                 constraintName="fk_category_service_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="service"
+                                 referencedColumnNames="service_id"/>
+        <!--Объединение таблиц администратов и операторов-->
+        <addForeignKeyConstraint baseTableName="administrator"
+                                 baseColumnNames="operator_id"
+                                 constraintName="fk_administrator_operator_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="operator"
+                                 referencedColumnNames="operator_id"/>
+        <!--Объединение таблиц начальников и операторов-->
+        <addForeignKeyConstraint baseTableName="chief"
+                                 baseColumnNames="operator_id"
+                                 constraintName="fk_chief_operator_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="operator"
+                                 referencedColumnNames="operator_id"/>
+        <!--Объединение таблиц начальников и администраторов-->
+        <addForeignKeyConstraint baseTableName="chief"
+                                 baseColumnNames="administrator_id"
+                                 constraintName="fk_chief_administrator_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="administrator"
+                                 referencedColumnNames="administrator_id"/>
+        <!--Объединение таблиц начальников и очереди-->
+        <addForeignKeyConstraint baseTableName="chief"
+                                 baseColumnNames="queue_id"
+                                 constraintName="fk_chief_queue_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="queue"
+                                 referencedColumnNames="client_id"/>
+        <!--Объединение таблиц начальников и услуги-->
+        <addForeignKeyConstraint baseTableName="chief"
+                                 baseColumnNames="service_id"
+                                 constraintName="fk_chief_service_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="service"
+                                 referencedColumnNames="service_id"/>
+        <!--Объединение таблиц начальников и категорий-->
+        <addForeignKeyConstraint baseTableName="chief"
+                                 baseColumnNames="category_id"
+                                 constraintName="fk_chief_category_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="category_service"
+                                 referencedColumnNames="category_id"/>
+    </changeSet>
+</databaseChangeLog>

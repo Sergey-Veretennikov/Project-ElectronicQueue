@@ -17,10 +17,10 @@ repositories {
 liquibase {
     activities {
         main {
-            changeLogFile 'src/main/migrations/master.groovy'
-            url 'jdbc:postgresql://localhost:5432/MyTestBase'
-            username 'baseWatcher'
-            password 'sa'
+            changeLogFile 'src/main/migrations/changelog.xml'
+            url 'jdbc:postgresql://localhost:5432/test' 
+            username 'postgres' 
+            password 'postgres' 
 
         }
     }
