@@ -9,11 +9,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Head of operators page</title>
 </head>
 <body>
-<c:forEach var="item" items="${testData}">
-    <h3>${item}</h3><BR>
-</c:forEach>
+Page for head of operators
 </body>
 </html>

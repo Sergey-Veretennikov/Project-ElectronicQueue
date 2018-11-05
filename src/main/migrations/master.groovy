@@ -1,3 +1,3 @@
 databaseChangeLog {
-    include file: "src/main/migrations/chengeLog1.0.groovy"
+   include file: "src/main/migrations/creatingUsersTable05_11.groovy"
 }

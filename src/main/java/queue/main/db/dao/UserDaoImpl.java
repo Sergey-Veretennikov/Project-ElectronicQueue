@@ -4,22 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public class TestDaoImpl implements TestDao{
-    private JdbcTemplate jdbcTemplate;
+public class UserDaoImpl implements UserDao {
+    JdbcTemplate jdbcTemplate;
 
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public TestDaoImpl() {
-    }
-
-    public List<Integer> getTestData(){
-        String query = "select id from testtable";
-        return jdbcTemplate.query(query, new TestMapper());
+    @Override
+    public void addUser(String login, String passwordHash) {
+        String addUserQuery = "insert into users (login_email, password, role_user) values (?,?,?)";
+        jdbcTemplate.update(addUserQuery, login, passwordHash, "ROLE_ADMIN");
     }
 }
