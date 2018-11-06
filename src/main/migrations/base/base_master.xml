@@ -5,5 +5,6 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
     <include file="2018_11_05_create_table_window.xml" relativeToChangelogFile="true" />
+    <include file="2018_11_06_update_table_autoincrement_id.xml" relativeToChangelogFile="true" />
 
 </databaseChangeLog>
