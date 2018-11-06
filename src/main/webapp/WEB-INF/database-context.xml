@@ -5,9 +5,9 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="$NEW_DATABASE_URL"/>
-        <property name="username" value="$DATABASE_USER"/>
-        <property name="password" value="$DATABASE_PASSWORD"/>
+        <property name="url" value="#{systemEnvironment['NEW_DATABASE_URL']}"/>
+        <property name="username" value="#{systemEnvironment['DATABASE_USER']}"/>
+        <property name="password" value="#{systemEnvironment['DATABASE_PASSWORD']}"/>
     </bean>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
