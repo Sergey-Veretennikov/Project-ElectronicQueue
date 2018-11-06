@@ -17,11 +17,10 @@ repositories {
 liquibase {
     activities {
         main {
-            changeLogFile 'src/main/migrations/changelog.xml'
-            url 'jdbc:postgresql://localhost:5432/test' 
-            username 'postgres' 
-            password 'postgres' 
-
+            changeLogFile 'src/main/migrations/master.groovy'
+            url 'jdbc:postgresql://' + System.getenv("DB_HOST").toString()+":"+System.getenv("DATABASE_PORT").toString() + "/"+ System.getenv("DB_NAME").toString()
+            username System.getenv("DATABASE_USER")
+            password System.getenv("DATABASE_PASSWORD")
         }
     }
 }
