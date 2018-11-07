@@ -17,11 +17,10 @@ repositories {
 liquibase {
     activities {
         main {
-            changeLogFile 'src/main/migrations/master.groovy'
-            url 'jdbc:postgresql://localhost:5432/MyTestBase'
-            username 'baseWatcher'
-            password 'sa'
-
+            changeLogFile 'src/main/migrations/changelog.xml'
+            url 'jdbc:postgresql://' + System.getenv("DB_HOST").toString()+":"+System.getenv("DATABASE_PORT").toString() + "/"+ System.getenv("DB_NAME").toString()
+            username System.getenv("DATABASE_USER")
+            password System.getenv("DATABASE_PASSWORD")
         }
     }
 }
@@ -67,4 +66,6 @@ dependencies {
     liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:2.0.1'
     liquibaseRuntime 'mysql:mysql-connector-java:5.1.34'
     liquibaseRuntime 'postgresql:postgresql:9.1-901.jdbc4'
+    compile group: 'org.hibernate', name: 'hibernate-gradle-plugin', version: '5.3.7.Final'
+
 }

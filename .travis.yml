@@ -16,8 +16,7 @@ deploy:
   provider: heroku
   api_key:
     secure: Ku6OIyhQ0eX02FGpxzZfFVoLQaKlzqTLMJrDeo9y2mQBsxChf0aZndW+jYN9LgPOLIxko5Dp/0xQBYHQ6CDrxFS0tt7hM63Vh9XJGMi0WBMJc/39YY9dxqhujY6OJJWB3NzOrKXI2fRSddPQKd+DG8AUfttjfxJADJ4hvRFhVUUTBilIp/Hpk+Rwf4z/GvI3jS5qRY4921LCp9N43LBYXYlsyTXZj+k+V0f8AV45SJPIP/xqqbSnzljWmZ90tMi310RMyz8E9IPetwU5W6baIHfCrs8+IQCz+Lqkqj6/0jkR3xL9F/p8zixAWoVPEtST3+BTquJXysxe54Ddrco8zLzRzxIVqdyJl7sXM04Cab6bCL01iJjOiEkNI3gO9pHP3huxJD9IVgkMsABGFzvdfMo2E1JuRURKbnzssFSAMgf7CwsCOBkKd5NzrOJGaKmwDQ1iruarlKBq4OOnnrv2FrXWdFyVI8hBo3PMQcXw7c3qZ99XSV63xwKL17ksXQeqwVPqujyFB8wygObfVjWRgxi2SrKQ4vrGNkRJ3W4fjVdv97HOiWVzc0jVlIZW/vMOjPjl4EpXOYDNDqSkwHs9SE8nf8hKcYOzastBiBLV6dU5gpqCL1BAL1Zuk3Nkcd0gkx81ByFl7XdOZaYtYUEYEjXZj1gbp7bPuR7M8rZE9q4=
-  on:
-    all_branches: true
+  on: develop
   app: electronicqueue
 before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
