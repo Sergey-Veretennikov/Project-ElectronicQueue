@@ -42,5 +42,4 @@ notifications:
     - nekhoroshevmv@gmail.com
     - kashenkovsergej@yandex.ru
     - dantesakbars@mail.ru
-    on_success: always
-
+    on_success: always # default: change
