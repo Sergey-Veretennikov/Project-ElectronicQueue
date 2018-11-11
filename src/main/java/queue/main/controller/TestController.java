@@ -74,4 +74,24 @@ public class TestController {
         model.addAttribute("loginError", error);
         return "login";
     }
+
+    @RequestMapping(value = "/terminal", method = RequestMethod.GET)
+    public String showTerminalPage(Model model) {
+        return "terminal";
+    }
+
+    @RequestMapping(value = "/sendTalon", method = RequestMethod.GET)
+    public String showSendTalonPage(Model model) {
+        return "sendTalon";
+    }
+
+    @RequestMapping(value = "/monitor", method = RequestMethod.GET)
+    public String showMonitor(Model model) {
+        return "monitor";
+    }
+
+    @RequestMapping(value = "/windowMonitor", method = RequestMethod.GET)
+    public String showWindowMonitor(Model model) {
+        return "windowMonitor";
+    }
 }
