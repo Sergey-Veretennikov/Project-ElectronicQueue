@@ -1,18 +1,17 @@
 package queue.main.db.dao;
 
-import queue.main.db.pojo.Operator;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import queue.main.db.pojo.Window;
 
 public class UserDaoHibTest {
+
     public static void main(String[] args) {
-
-        Operator operator = new Operator("Name","Login","Password","Role",30,"Contact");
-        UserDaoHibImpl.init();
-        UserDaoHib userDaoHib = new UserDaoHibImpl();
-        userDaoHib.create(operator);
-//        Operator operator1 = (Operator)userDaoHib.getById((long) 1, Operator.class);
-//        System.out.println(operator1.toString());
-        UserDaoHibImpl.sessionFactory.close();
-
-
+        ApplicationContext context = new ClassPathXmlApplicationContext("springHibernate.xml");
+        UserDaoHib userDaoHib = (UserDaoHib) context.getBean("userDao");
+        Window window = new Window("window1");
+        Integer ID = userDaoHib.add(window);
+        Window window1 = (Window)userDaoHib.getById(ID,Window.class);
+        System.out.println(window1.toString());
     }
 }
