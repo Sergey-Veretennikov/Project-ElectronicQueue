@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>User page</title>
+    <title>Guest page</title>
 </head>
 <body>
-Page for user
+Page for Guest
 </body>
 </html>

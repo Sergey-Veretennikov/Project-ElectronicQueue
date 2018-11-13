@@ -11,7 +11,7 @@
 
     <http auto-config="true">
         <csrf disabled="true"/>
-        <intercept-url pattern="/user**" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/guest**" access="hasRole('ROLE_GUEST')"/>
         <intercept-url pattern="/operator**" access="hasRole('ROLE_OPERATOR')"/>
         <intercept-url pattern="/head**" access="hasRole('ROLE_HEAD_OPERATOR')"/>
         <intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')"/>
@@ -44,9 +44,12 @@
             <password-encoder ref="passwordEncoder"/>
             <jdbc-user-service data-source-ref="dataSource"
                                users-by-username-query=
-                                       "SELECT login_email , password,true FROM users WHERE login_email=?"
+                                       'SELECT login, password, "isActive" FROM users WHERE login=?'
                                authorities-by-username-query=
-                                       "SELECT login_email, role_user FROM users WHERE login_email=?"/>
+                                       'SELECT u.login, r."roleName" FROM users u, "usersRole" uR, role r
+                                        WHERE u."usersID" = uR."usersID"
+                                        AND r."roleID" = uR."roleID" AND u.login =?'/>
+
         </authentication-provider>
     </authentication-manager>
 

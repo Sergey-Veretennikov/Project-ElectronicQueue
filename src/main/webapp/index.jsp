@@ -17,7 +17,7 @@
 <br>
 <a href="/registrationpage">Registration page</a><br>
 <br>
-<a href="/userpage">User page</a><br>
+<a href="/guestpage">Guest page</a><br>
 <br>
 <a href="/operatorpage">Operator page</a><br>
 <br>
