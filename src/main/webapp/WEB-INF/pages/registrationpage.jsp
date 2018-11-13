@@ -56,7 +56,7 @@
         <input type="password" name="password" class="form-control" placeholder="Password" required>
         <label for="sel1">Выберите полномочия:</label>
         <select class="form-control" name="role" id="sel1">
-            <option value="ROLE_USER">Пользователь</option>
+            <option value="ROLE_GUEST">Пользователь</option>
             <option value="ROLE_OPERATOR">Оператор</option>
             <option value="ROLE_HEAD_OPERATOR">Руководитель оператора</option>
             <option value="ROLE_ADMIN">Администратор</option>
