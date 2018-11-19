@@ -18,7 +18,7 @@ liquibase {
     activities {
         main {
             changeLogFile 'src/main/migrations/changelog.xml'
-            url 'jdbc:postgresql://' + System.getenv("DB_HOST").toString() + ":" + System.getenv("DATABASE_PORT").toString() + "/" + System.getenv("DB_NAME").toString()
+            url System.getenv("URL")
             username System.getenv("DATABASE_USER")
             password System.getenv("DATABASE_PASSWORD")
         }
