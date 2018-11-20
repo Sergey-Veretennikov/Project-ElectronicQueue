@@ -13,17 +13,17 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
 }
-
 liquibase {
     activities {
         main {
             changeLogFile 'src/main/migrations/changelog.xml'
-            url 'jdbc:postgresql://' + System.getenv("DB_HOST").toString()+":"+System.getenv("DATABASE_PORT").toString() + "/"+ System.getenv("DB_NAME").toString()
-            username System.getenv("DATABASE_USER")
-            password System.getenv("DATABASE_PASSWORD")
+            url 'jdbc:postgresql://localhost:5432/MyTestBase'
+            username 'postgres'
+            password '12'
         }
     }
 }
+
 
 test {
     useJUnitPlatform()
