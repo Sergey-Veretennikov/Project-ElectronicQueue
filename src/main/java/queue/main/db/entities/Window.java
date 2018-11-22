@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
+//@Entity
 @Table(name = "windows")
 public class Window implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "windowsID")
+    @Column(name = "window_id")
     private Integer windowID;
     @Basic
     private String name;

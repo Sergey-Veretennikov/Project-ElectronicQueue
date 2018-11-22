@@ -59,11 +59,15 @@ public class TestController {
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String registerUser(@RequestParam(value = "login", required = true) String login,
+    public String registerUser(@RequestParam(value = "name", required = true) String name,
+                               @RequestParam(value = "surname", required = true) String surname,
+                               @RequestParam(value = "dateofBirth", required = true) String dateofBirth,
+                               @RequestParam(value = "contact", required = true) String contact,
+                               @RequestParam(value = "login", required = true) String login,
                                @RequestParam(value = "password", required = true) String password,
                                @RequestParam(value = "role", required = true) String role,
                                Model model) {
-        userService.addUser(login, password, role);
+        userService.addUser(name, surname, dateofBirth, contact, login, password, role);
         return "registrationpage";
     }
 

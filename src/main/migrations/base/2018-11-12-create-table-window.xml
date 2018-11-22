@@ -3,230 +3,248 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
-    
+
     <changeSet id="2018-11-12-create-table-window" author="kashenkov">
 
         <!--<sql>CREATE TYPE active AS ENUM ('0','1')</sql>-->
 
         <!--Создание таблицы окна-->
-        <createTable tableName="window" remarks="Окна">
-            <column name="windowID" type="integer" autoIncrement="true">
+        <createTable tableName="windows" remarks="Окна">
+            <column name="window_id" type="integer" autoIncrement="true">
                 <constraints
                         nullable="false"
                         primaryKey="true"
                         primaryKeyName="window_pkey"/>
-            </column>   
+            </column>
             <column name="name" type="varchar(32)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
         <!--Создание таблицы ролей-->
         <createTable tableName="role" remarks="Роли">
-            <column name="roleID" type="integer" autoIncrement="true">
+            <column name="role_id" type="integer" autoIncrement="true">
                 <constraints
                         nullable="false"
                         primaryKey="true"
                         primaryKeyName="role_pkey"/>
             </column>
-            <column name="roleName" type="varchar(32)">
+            <column name="role_name" type="varchar(32)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
         <!--Создание таблицы пользовательских ролей-->
-        <createTable tableName="usersRole" remarks="Пользовательские роли">
-            <column name="usersRoleID" type="integer" autoIncrement="true">
-                <constraints
-                        nullable="false"
-                        primaryKey="true"
-                        primaryKeyName="usersRole_pkey"/>
-            </column>
-            <column name="usersID" type="integer">
+        <createTable tableName="users_role" remarks="Пользовательские роли">
+            <!--            <column name="usersRoleID" type="integer" autoIncrement="true">
+                            <constraints
+                                    nullable="false"
+                                    primaryKey="true"
+                                    primaryKeyName="usersRole_pkey"/>
+                        </column>-->
+            <column name="users_id" type="integer">
                 <constraints nullable="false" unique="false"/>
             </column>
-            <column name="roleID" type="integer">
+            <column name="role_id" type="integer">
                 <constraints nullable="false" unique="false"/>
             </column>
         </createTable>
+
         <!--Создание таблицы пользователей-->
-        <createTable tableName="users"  remarks="Пользователи">
-            <column name="usersID" type="integer" autoIncrement="true">
+        <createTable tableName="users" remarks="Пользователи">
+            <column name="users_id" type="integer" autoIncrement="true">
                 <constraints
                         nullable="false"
                         primaryKey="true"
                         primaryKeyName="users_pkey"/>
             </column>
-            <column name="login" type="varchar(32)"/>
-            <column name="password" type="varchar(64)"/>
-            <column name="isActive" type="Boolean"/>
-            <column name="userInfoID" type="integer">
+            <column name="login" type="varchar(32)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(64)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="is_active" type="Boolean">
                 <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="user_info_id" type="integer">
+                <constraints nullable="false" unique="true"/>
             </column>
 
         </createTable>
         <!--Создание таблицы информации по пользователям-->
-        <createTable tableName="userInfo"  remarks="Информация по пользователям">
-            <column name="userInfoID" type="integer" autoIncrement="true">
+        <createTable tableName="user_info" remarks="Информация по пользователям">
+            <column name="user_info_id" type="integer" autoIncrement="true">
                 <constraints
                         nullable="false"
                         primaryKey="true"
-                        primaryKeyName="userInfo_pkey"/>
+                        primaryKeyName="user_info_pkey"/>
             </column>
-            <column name="name" type="varchar(64)"/>
-            <column name="surname" type="varchar(64)"/>
-            <column name="dateofBirth" type="DATETIME"/>
-            <column name="contact" type="varchar(64)"/>
+            <column name="name" type="varchar(64)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="surname" type="varchar(64)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="dateof_birth" type="DATE">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="contact" type="varchar(64)">
+                <constraints nullable="false" unique="false"/>
+            </column>
         </createTable>
+
         <!--Создание таблицы очереди-->
         <createTable tableName="queue" remarks="Очередь">
-            <column name="queueId" type="integer" autoIncrement="true">
+            <column name="queue_id" type="integer" autoIncrement="true">
                 <constraints
                         nullable="false"
                         primaryKey="true"
                         primaryKeyName="queue_pkey"/>
             </column>
-            <column name="usersOperatorID" type="integer">
+            <column name="users_operator_id" type="integer">
+                <constraints nullable="true" unique="true"/>
+            </column>
+            <column name="window_id" type="integer">
                 <constraints nullable="false" unique="false"/>
             </column>
-            <column name="windowID" type="integer">
+            <column name="service_id" type="integer">
                 <constraints nullable="false" unique="false"/>
             </column>
-            <column name="serviceID" type="integer">
-                <constraints nullable="false" unique="false"/>
-            </column>
-            <column name="dateTime" type="date"/>
+            <column name="date_time" type="date"/>
         </createTable>
         <!--Создание таблицы услуг-->
         <createTable tableName="service" remarks="Услуги">
-            <column name="serviceID" type="integer" autoIncrement="true">
+            <column name="service_id" type="integer" autoIncrement="true">
                 <constraints
                         nullable="false"
                         primaryKey="true"
                         primaryKeyName="service_pkey"/>
             </column>
-            <column name="serviceName" type="varchar(32)"/>
-            <column name="permissionID" type="integer">
+            <column name="service_name" type="varchar(32)"/>
+            <column name="permission_id" type="integer">
                 <constraints nullable="false" unique="false"/>
             </column>
-            <column name="averageLeadTime" type="integer">
+            <column name="average_lead_time" type="integer">
                 <constraints nullable="false" unique="false"/>
             </column>
         </createTable>
         <!--Создание таблицы permission-->
         <createTable tableName="permission">
-            <column name="permissionID" type="integer" autoIncrement="true">
+            <column name="permission_id" type="integer" autoIncrement="true">
                 <constraints
                         nullable="false"
                         primaryKey="true"
                         primaryKeyName="permission_pkey"/>
             </column>
-            <column name="permissionName" type="varchar(32)"/>
+            <column name="permission_name" type="varchar(32)"/>
         </createTable>
         <!--Создание таблицы RolePermisssion-->
-        <createTable tableName="rolePermission">
-            <column name="rolePermissionID" type="integer" autoIncrement="true">
+        <createTable tableName="role_permission">
+            <column name="role_permission_id" type="integer" autoIncrement="true">
                 <constraints
                         nullable="false"
                         primaryKey="true"
-                        primaryKeyName="rolePermission_pkey"/>
+                        primaryKeyName="role_permission_pkey"/>
             </column>
-            <column name="roleID" type="integer">
+            <column name="role_id" type="integer">
                 <constraints nullable="false" unique="false"/>
             </column>
-            <column name="permissionID" type="integer">
+            <column name="permission_id" type="integer">
                 <constraints nullable="false" unique="false"/>
             </column>
         </createTable>
 
         <!--Объединение таблиц пользовательских ролей и ролей-->
-        <addForeignKeyConstraint baseTableName="usersRole"
-                                 baseColumnNames="roleID"
-                                 constraintName="fk_usersRole_role"
+        <addForeignKeyConstraint baseTableName="users_role"
+                                 baseColumnNames="role_id"
+                                 constraintName="fk_users_role_role"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedTableName="role"
-                                 referencedColumnNames="roleID"/>
+                                 referencedColumnNames="role_id"/>
         <!--Объединение таблиц пользовательских ролей и пользователей-->
-        <addForeignKeyConstraint baseTableName="usersRole"
-                                 baseColumnNames="usersID"
-                                 constraintName="fk_usersRole_users"
+        <addForeignKeyConstraint baseTableName="users_role"
+                                 baseColumnNames="users_id"
+                                 constraintName="fk_users_role_users"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedTableName="users"
-                                 referencedColumnNames="usersID"/>
+                                 referencedColumnNames="users_id"/>
         <!--Объединение таблиц информации по пользователям и пользователей-->
         <addForeignKeyConstraint baseTableName="users"
-                                 baseColumnNames="userInfoID"
-                                 constraintName="fk_users_userInfo"
+                                 baseColumnNames="user_info_id"
+                                 constraintName="fk_users_user_info"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
-                                 referencedTableName="userInfo"
-                                 referencedColumnNames="userInfoID"/>
+                                 referencedTableName="user_info"
+                                 referencedColumnNames="user_info_id"/>
         <!--Объединение таблиц очереди и пользователей-->
         <addForeignKeyConstraint baseTableName="queue"
-                                 baseColumnNames="usersOperatorID"
+                                 baseColumnNames="users_operator_id"
                                  constraintName="fk_queue_users"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedTableName="users"
-                                 referencedColumnNames="usersID"/>
+                                 referencedColumnNames="users_id"/>
         <!--Объединение таблиц очереди и окна-->
         <addForeignKeyConstraint baseTableName="queue"
-                                 baseColumnNames="windowID"
+                                 baseColumnNames="window_id"
                                  constraintName="fk_queue_window"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
-                                 referencedTableName="window"
-                                 referencedColumnNames="windowID"/>
+                                 referencedTableName="windows"
+                                 referencedColumnNames="window_id"/>
         <!--Объединение таблиц очереди и услуг-->
         <addForeignKeyConstraint baseTableName="queue"
-                                 baseColumnNames="serviceID"
+                                 baseColumnNames="service_id"
                                  constraintName="fk_queue_service"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedTableName="service"
-                                 referencedColumnNames="serviceID"/>
+                                 referencedColumnNames="service_id"/>
         <!--Объединение таблиц услуг и permission-->
         <addForeignKeyConstraint baseTableName="service"
-                                 baseColumnNames="permissionID"
+                                 baseColumnNames="permission_id"
                                  constraintName="fk_service_permission"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedTableName="permission"
-                                 referencedColumnNames="permissionID"/>
+                                 referencedColumnNames="permission_id"/>
         <!--Объединение rolePermission и ролей-->
-        <addForeignKeyConstraint baseTableName="rolePermission"
-                                 baseColumnNames="roleID"
-                                 constraintName="fk_rolePermission_role"
+        <addForeignKeyConstraint baseTableName="role_permission"
+                                 baseColumnNames="role_id"
+                                 constraintName="fk_role_permission_role"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedTableName="role"
-                                 referencedColumnNames="roleID"/>
+                                 referencedColumnNames="role_id"/>
         <!--Объединение rolePermission и permission-->
-        <addForeignKeyConstraint baseTableName="rolePermission"
-                                 baseColumnNames="permissionID"
-                                 constraintName="fk_rolePermission_permission"
+        <addForeignKeyConstraint baseTableName="role_permission"
+                                 baseColumnNames="permission_id"
+                                 constraintName="fk_role_permission_permission"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedTableName="permission"
-                                 referencedColumnNames="permissionID"/>
+                                 referencedColumnNames="permission_id"/>
 
     </changeSet>
 </databaseChangeLog>

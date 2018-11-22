@@ -1,29 +1,31 @@
 package queue.main.db.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "role")
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "roleID")
+    @Column(name = "role_id")
     private Integer roleID;
-    @Basic
+
+    @Column(name = "role_name")
     private String roleName;
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "usersRole",
-            joinColumns = @JoinColumn (name ="roleID"),
-            inverseJoinColumns = @JoinColumn(name = "usersID"))
-    private List<Users> users = new ArrayList<>();
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "RolePermission",
-            joinColumns = @JoinColumn (name ="roleID"),
-            inverseJoinColumns = @JoinColumn(name = "permissionID"))
-    private List<Permission> permissions = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_role",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "users_id"))
+    private Set<Users> users = new HashSet<>();
+
+/*    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "role_permission",
+            joinColumns = @JoinColumn (name ="role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id"))
+    private List<Permission> permissions = new ArrayList<>();*/
 
     public Role() {
     }
@@ -44,15 +46,15 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public List<Users> getUsers() {
+    public Set<Users> getUsers() {
         return users;
     }
 
-    public List<Permission> getPermissions() {
+   /* public List<Permission> getPermissions() {
         return permissions;
     }
-
-    @Override
+*/
+  /*  @Override
     public String toString() {
         return "Role{" +
                 "roleID=" + roleID +
@@ -72,10 +74,10 @@ public class Role {
                 Objects.equals(users, role.users) &&
                 Objects.equals(permissions, role.permissions);
     }
-
-    @Override
+*/
+  /*  @Override
     public int hashCode() {
         return Objects.hash(roleID, roleName, users, permissions);
-    }
+    }*/
 
 }

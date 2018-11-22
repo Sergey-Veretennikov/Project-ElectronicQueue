@@ -1,8 +1,10 @@
 package queue.main.db.dao;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import queue.main.db.entities.Users;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -44,5 +46,12 @@ public class UserDaoHibImpl implements UserDaoHib {
     @Transactional
     public void delete(Object user) {
         sessionFactory.getCurrentSession().delete(user);
+    }
+
+    @Override
+    @Transactional
+    public void addUsers(Users user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(user);
     }
 }
