@@ -59,12 +59,18 @@
         <br>
         <input type="email" name="login" class="form-control" placeholder="Email address" required autofocus>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
-        <label for="sel1">Выберите полномочия:</label>
-        <select class="form-control" name="role" id="sel1">
+        <label for="sel">Выберите полномочия:</label>
+        <select class="form-control" name="role" id="sel">
             <option value="ROLE_GUEST">Пользователь</option>
             <option value="ROLE_OPERATOR">Оператор</option>
             <option value="ROLE_HEAD_OPERATOR">Руководитель оператора</option>
             <option value="ROLE_ADMIN">Администратор</option>
+        </select>
+        <br>
+        <label for="sel1">Учетная запись:</label>
+        <select class="form-control" name="isActive" id="sel1">
+            <option value="true">Активна</option>
+            <option value="false">Неактивна</option>
         </select>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit" value="Login">Зарегистрироваться</button>

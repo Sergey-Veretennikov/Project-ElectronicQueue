@@ -13,7 +13,7 @@ public class Queue {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_operator_id")
+    @JoinColumn(name = "users_operator_id", unique = true, nullable = false)
     private Users users;
 
     /* @OneToMany(mappedBy = "queue")

@@ -44,7 +44,6 @@ public class Users {
         this.password = password;
         this.isActive = isActive;
         this.userInfo = userInfo;
-        //this.queue = queue;
         this.roles.add(role);
     }
 

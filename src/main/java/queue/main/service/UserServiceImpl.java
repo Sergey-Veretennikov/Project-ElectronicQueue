@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(String name, String surname, String dateofBirth, String contact, String login, String password,
-                        String role) {
+                        String role, String isActive) {
         String cryptPassword = bCryptPasswordEncoder.encode(password);
         /*userDao.addUser(login, cryptPassword, role);*/
 
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
 
-        Users users = new Users(login, cryptPassword, true,
+        Users users = new Users(login, cryptPassword, isActive.equals("true"),
                 new UserInfo(name, surname, parsed, contact), new Role(role));
         userDaoHib.addUsers(users);
     }

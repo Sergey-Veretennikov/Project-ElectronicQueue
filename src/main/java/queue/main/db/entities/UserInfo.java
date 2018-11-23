@@ -40,6 +40,10 @@ public class UserInfo {
         return userInfoID;
     }
 
+    public void setUserInfoID(Integer userInfoID) {
+        this.userInfoID = userInfoID;
+    }
+
     public String getName() {
         return name;
     }
