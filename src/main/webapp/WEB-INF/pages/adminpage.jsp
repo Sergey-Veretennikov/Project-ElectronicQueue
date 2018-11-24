@@ -180,4 +180,5 @@
 
 <div class="footer">ООО "Рога и копыта" благодарят вас за визит</div>
 </body>
+<a href="/static/j_spring_security_logout">Выйти</a>
 </html>
