@@ -1,29 +1,35 @@
 package queue.main.db.entities;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Table(name = "user_info")
 public class UserInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userInfoID")
+    @Column(name = "user_info_id", unique = true, nullable = false)
     private Integer userInfoID;
-    @Basic
+
+    @Column(name = "name", nullable = false)
     private String name;
-    @Basic
+
+    @Column(name = "surname", nullable = false)
     private String surname;
-    @Basic
-    private Timestamp dateofBirth;
-    @Basic
+
+    @Column(name = "dateof_birth", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dateofBirth;
+
+    @Column(name = "contact", nullable = false)
     private String contact;
 
     public UserInfo() {
     }
 
-    public UserInfo(String name, String surname, Timestamp dateofBirth, String contact) {
+    public UserInfo(String name, String surname, Date dateofBirth, String contact) {
         this.name = name;
         this.surname = surname;
         this.dateofBirth = dateofBirth;
@@ -32,6 +38,10 @@ public class UserInfo {
 
     public Integer getUserInfoID() {
         return userInfoID;
+    }
+
+    public void setUserInfoID(Integer userInfoID) {
+        this.userInfoID = userInfoID;
     }
 
     public String getName() {
@@ -50,11 +60,11 @@ public class UserInfo {
         this.surname = surname;
     }
 
-    public Timestamp getDateofBirth() {
+    public Date getDateofBirth() {
         return dateofBirth;
     }
 
-    public void setDateofBirth(Timestamp dateofBirth) {
+    public void setDateofBirth(Date dateofBirth) {
         this.dateofBirth = dateofBirth;
     }
 
