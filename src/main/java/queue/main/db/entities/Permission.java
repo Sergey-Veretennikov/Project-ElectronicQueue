@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-//@Entity
+@Entity
 public class Permission {
 
     @Id

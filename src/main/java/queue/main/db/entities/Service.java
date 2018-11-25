@@ -1,32 +1,37 @@
 package queue.main.db.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
-//@Entity
+@Entity
 public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "service_id")
     private Integer serviceID;
-    @Basic
+
+    @Column(name = "service_name")
     private String serviceName;
-    @Basic
+
+    @Column(name = "average_lead_time")
     private Integer averageLeadTime;
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    private Queue queue;
-    @OneToMany(mappedBy = "service")
+
+    @OneToMany(mappedBy = "service", fetch = FetchType.LAZY)
+    private Set<Queue> queue = new HashSet<>();
+
+    @OneToMany(mappedBy = "service", fetch = FetchType.LAZY)
     private List<Permission> permissions;
 
     public Service() {
     }
 
-    public Service(String serviceName, Integer averageLeadTime, Queue queue) {
+    public Service(String serviceName, Integer averageLeadTime) {
         this.serviceName = serviceName;
         this.averageLeadTime = averageLeadTime;
-        this.queue = queue;
     }
 
     public String getServiceName() {
@@ -45,11 +50,11 @@ public class Service {
         this.averageLeadTime = averageLeadTime;
     }
 
-    public Queue getQueue() {
+    public Set<Queue> getQueue() {
         return queue;
     }
 
-    public void setQueue(Queue queue) {
+    public void setQueue(Set<Queue> queue) {
         this.queue = queue;
     }
 

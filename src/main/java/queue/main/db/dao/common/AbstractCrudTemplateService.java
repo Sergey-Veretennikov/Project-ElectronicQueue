@@ -40,7 +40,7 @@ public abstract class AbstractCrudTemplateService<T> implements  ICrudTemplateSe
 
     @Transactional
     public List<T> getAll() {
-        List<T> list = getCurrentSession().createQuery("FROM " + getEntityTableName() + " order by ").list();
+        List<T> list = getCurrentSession().createQuery("from " + getEntityTableName()).list();
         return list;
     }
 
