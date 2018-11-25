@@ -43,11 +43,6 @@ public class TestController {
         return "adminpage";
     }
 
-    @RequestMapping(value = "/guestpage", method = RequestMethod.GET)
-    public String showUserPage(Model model) {
-        return "guestpage";
-    }
-
     @RequestMapping(value = "/operatorpage", method = RequestMethod.GET)
     public String showOperatorPage(Model model) {
         return "operatorpage";

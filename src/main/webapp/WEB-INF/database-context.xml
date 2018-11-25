@@ -19,10 +19,6 @@
         <property name="password" value="sa"/>
     </bean>
 
-    <!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-            <constructor-arg name="dataSource" ref="dataSource"/>
-        </bean>-->
-
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="queue.main.db.entities"/>
@@ -39,6 +35,4 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <tx:annotation-driven transaction-manager="txManager"/>
-    <!-- <bean id="userDao" class="queue.main.db.dao.UserDaoHibImpl"/>-->
-
 </beans>
