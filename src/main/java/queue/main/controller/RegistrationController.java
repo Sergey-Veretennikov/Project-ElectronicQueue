@@ -26,8 +26,13 @@ public class RegistrationController {
                                @RequestParam(value = "password", required = true) String password,
                                @RequestParam(value = "idRole", required = true) String idRole,
                                @RequestParam(value = "isActive", required = true) String isActive,
+                               @RequestParam(value = "registrationFailed", required = false) String registrationFailed,
                                Model model) {
-        userService.addUser(name, surname, dateofBirth, contact, login, password, idRole, isActive);
+        if (userService.addUser(name, surname, dateofBirth, contact, login, password, idRole, isActive)) {
+            return "registrationpage";
+        }
+        registrationFailed = "registrationFailed";
+        model.addAttribute("registrationFailed", registrationFailed);
         return "registrationpage";
     }
 }

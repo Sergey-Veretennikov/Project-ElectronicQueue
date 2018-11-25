@@ -23,11 +23,6 @@ public class UserServiceImpl implements UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-   /* @Autowired
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }*/
-
     @Autowired
     public void setUserDaoHib(UserDaoHib userDaoHib) {
         this.userDaoHib = userDaoHib;
@@ -35,18 +30,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void addUser(String name, String surname, String dateofBirth, String contact, String login, String password,
-                        String idRole, String isActive) {
+    public boolean addUser(String name, String surname, String dateofBirth, String contact, String login, String password,
+                           String idRole, String isActive) {
         String cryptPassword = bCryptPasswordEncoder.encode(password);
 
         Users users = userDaoHib.getUser(login);
 
         if (users == null) {
-            users = new Users(login, cryptPassword, isActive.equals("true"),
-                    new UserInfo(name, surname, convertStringToDate(dateofBirth), contact)
+            users = new Users(login, cryptPassword, isActive.equals("true")
+                    , new UserInfo(name, surname, convertStringToDate(dateofBirth), contact)
                     , userDaoHib.getRole(Integer.valueOf(idRole)));
             userDaoHib.addUsers(users);
+            return true;
         }
+        return false;
     }
 
     private Date convertStringToDate(String stringDate) {
