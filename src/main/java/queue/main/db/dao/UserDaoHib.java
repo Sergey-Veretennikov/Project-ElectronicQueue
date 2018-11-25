@@ -1,5 +1,6 @@
 package queue.main.db.dao;
 
+import queue.main.db.entities.Role;
 import queue.main.db.entities.Users;
 
 import java.util.List;
@@ -15,5 +16,9 @@ public interface UserDaoHib {
 
     void delete(Object user);
 
-    public void addUsers(Users user);
+    void addUsers(Users user);
+
+    Role getRole(Integer id);
+
+    Users getUser(String login);
 }

@@ -60,11 +60,21 @@
         <input type="email" name="login" class="form-control" placeholder="Email address" required autofocus>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
         <label for="sel">Выберите полномочия:</label>
-        <select class="form-control" name="role" id="sel">
-            <option value="ROLE_GUEST">Пользователь</option>
-            <option value="ROLE_OPERATOR">Оператор</option>
-            <option value="ROLE_HEAD_OPERATOR">Руководитель оператора</option>
-            <option value="ROLE_ADMIN">Администратор</option>
+        <select class="form-control" name="idRole" id="sel">
+            <option value="1">Пользователь</option>
+            <%-- ROLE_GUEST--%>
+            <option value="2">Оператор № 1</option>
+            <%-- ROLE_OPERATOR_1--%>
+            <option value="3">Оператор № 2</option>
+            <%-- ROLE_OPERATOR_2--%>
+            <option value="4">Оператор № 3</option>
+            <%-- ROLE_OPERATOR_3--%>
+            <option value="5">Оператор № 4</option>
+            <%-- ROLE_OPERATOR_4--%>
+            <option value="6">Руководитель оператора</option>
+            <%-- ROLE_HEAD_OPERATOR--%>
+            <option value="7">Администратор</option>
+            <%-- ROLE_ADMIN--%>
         </select>
         <br>
         <label for="sel1">Учетная запись:</label>

@@ -24,10 +24,10 @@ public class RegistrationController {
                                @RequestParam(value = "contact", required = true) String contact,
                                @RequestParam(value = "login", required = true) String login,
                                @RequestParam(value = "password", required = true) String password,
-                               @RequestParam(value = "role", required = true) String role,
+                               @RequestParam(value = "idRole", required = true) String idRole,
                                @RequestParam(value = "isActive", required = true) String isActive,
                                Model model) {
-        userService.addUser(name, surname, dateofBirth, contact, login, password, role, isActive);
+        userService.addUser(name, surname, dateofBirth, contact, login, password, idRole, isActive);
         return "registrationpage";
     }
 }

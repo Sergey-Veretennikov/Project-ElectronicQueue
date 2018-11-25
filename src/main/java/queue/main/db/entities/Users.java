@@ -34,7 +34,7 @@ public class Users {
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-    private Set<Queue> queue = new HashSet<>();
+    private Set<Queue> queues = new HashSet<>();
 
     public Users() {
     }
@@ -96,11 +96,11 @@ public class Users {
     }
 
     public Set<Queue> getQueue() {
-        return queue;
+        return queues;
     }
 
     public void setQueue(Set<Queue> queue) {
-        this.queue = queue;
+        this.queues = queues;
     }
 
     @Override
@@ -112,7 +112,7 @@ public class Users {
                 ", isActive=" + isActive +
                 ", userInfo=" + userInfo +
                 ", roles=" + roles +
-                ", queue=" + queue +
+                ", queue=" + queues +
                 '}';
     }
 
@@ -127,11 +127,11 @@ public class Users {
                 Objects.equals(isActive, users.isActive) &&
                 Objects.equals(userInfo, users.userInfo) &&
                 Objects.equals(roles, users.roles) &&
-                Objects.equals(queue, users.queue);
+                Objects.equals(queues, users.queues);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userID, login, password, isActive, userInfo, roles, queue);
+        return Objects.hash(userID, login, password, isActive, userInfo, roles, queues);
     }
 }
