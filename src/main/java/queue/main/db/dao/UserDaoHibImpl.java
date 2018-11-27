@@ -1,65 +1,48 @@
 package queue.main.db.dao;
 
-import org.apache.log4j.Logger;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
-
+@Repository
 public class UserDaoHibImpl implements UserDaoHib {
-    private static final Logger log = Logger.getLogger(UserDaoHibImpl.class);
 
-    public static SessionFactory sessionFactory;
-    public static Session session;
+    @Autowired
+    SessionFactory sessionFactory;
 
-
-    public static void init() {
-        log.debug("Init");
-        sessionFactory = new Configuration().configure().buildSessionFactory();
-        session = sessionFactory.openSession();
+    @Override
+    @Transactional
+    public Integer add(Object user) {
+        sessionFactory.openSession();
+        Integer id = (Integer) sessionFactory.getCurrentSession().save(user);
+        return id;
     }
 
     @Override
-    public void create(Object user) {
-        log.debug("Transaction create");
-        session.beginTransaction();
-        session.save(user);
-        session.getTransaction().commit();
-
-    }
-
-    @Override
+    @Transactional
     public void update(Object user) {
-        log.debug("Transaction update");
-        session.beginTransaction();
-        session.saveOrUpdate(user);
-        session.getTransaction().commit();
+        sessionFactory.getCurrentSession().update(user);
     }
 
     @Override
-    public Object getById(Long userId, Class<?> t) {
-        log.debug("Transaction getbyID");
-        session.beginTransaction();
-        Object obj = session.get(t, userId);
-        session.getTransaction().commit();
+    @Transactional
+    public Object getById(Integer userId, Class<?> t) {
+        Object obj =  sessionFactory.getCurrentSession().get(t, userId);
         return obj;
     }
 
     @Override
+    @Transactional
     public List<Object> getAll(String s) {
-        log.debug("Transaction get ListGetALL");
-        session.beginTransaction();
-        List<Object> list = session.createQuery("FROM " + s + " order by ").list();
-        session.getTransaction().commit();
+        List<Object> list = sessionFactory.getCurrentSession().createQuery("FROM " + s + " order by ").list();
         return list;
     }
 
     @Override
+    @Transactional
     public void delete(Object user) {
-        log.debug("Transaction delete");
-        session.beginTransaction();
-        session.delete(user);
-        session.getTransaction().commit();
+        sessionFactory.getCurrentSession().delete(user);
     }
 }

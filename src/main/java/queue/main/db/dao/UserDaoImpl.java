@@ -15,7 +15,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(String login, String passwordHash, String role) {
-        String addUserQuery = "insert into users (login_email, password, role_user) values (?,?,?)";
-        jdbcTemplate.update(addUserQuery, login, passwordHash, role);
+        String addUserQuery = "insert into users (login, password, \"isActive\", \"userInfoID\") values (?,?,true ,1)";
+        String addRoleQuery = "INSERT INTO role ( \"roleName\" ) VALUES (?)";
+        jdbcTemplate.update(addUserQuery, login, passwordHash);
+        jdbcTemplate.update(addRoleQuery, role);
     }
 }
