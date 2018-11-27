@@ -28,11 +28,11 @@ public class RegistrationController {
                                @RequestParam(value = "isActive", required = true) String isActive,
                                @RequestParam(value = "registrationFailed", required = false) String registrationFailed,
                                Model model) {
-        if (userService.addUser(name, surname, dateofBirth, contact, login, password, idRole, isActive)) {
-            return "registrationpage";
+        if (!(userService.addUser(name.trim(), surname.trim(), dateofBirth, contact.trim(), login.trim()
+                , password.trim(), idRole, isActive))) {
+            registrationFailed = "registrationFailed";
+            model.addAttribute("registrationFailed", registrationFailed);
         }
-        registrationFailed = "registrationFailed";
-        model.addAttribute("registrationFailed", registrationFailed);
         return "registrationpage";
     }
 }

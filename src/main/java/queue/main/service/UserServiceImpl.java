@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
         Users users = userDaoHib.getUser(login);
 
         if (users == null) {
-            users = new Users(login, cryptPassword, isActive.equals("true")
+            users = new Users(login, cryptPassword, "true".equals(isActive)
                     , new UserInfo(name, surname, convertStringToDate(dateofBirth), contact)
                     , userDaoHib.getRole(Integer.valueOf(idRole)));
             userDaoHib.addUsers(users);

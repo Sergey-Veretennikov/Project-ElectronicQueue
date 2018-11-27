@@ -1,5 +1,6 @@
 package queue.main.db.dao;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,8 @@ import queue.main.db.entities.Role;
 import queue.main.db.entities.Users;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
+
 
 @Repository
 public class UserDaoHibImpl implements UserDaoHib {
@@ -52,26 +53,26 @@ public class UserDaoHibImpl implements UserDaoHib {
     }
 
     @Override
-    //@Transactional
     public void addUsers(Users user) {
         Session session = sessionFactory.getCurrentSession();
         session.save(user);
     }
 
     @Override
-    // @Transactional
     public Role getRole(Integer id) {
         Session session = sessionFactory.getCurrentSession();
-        return (Role) session.get(Role.class, id);
+        return session.get(Role.class, id);
     }
 
     @Override
     public Users getUser(String login) {
         Session session = sessionFactory.getCurrentSession();
-        List<Users> usersList = new ArrayList<>();
-        usersList = session.createQuery("from Users where login=: login").setParameter("login", login).list();
-        if (usersList.size() > 0) {
-            return usersList.get(0);
-        } else return null;
+        List<Users> usersList;
+        usersList = session.createQuery("from Users where login=: login")
+                .setParameter("login", login).list();
+
+        if (usersList.isEmpty()) {
+            return null;
+        } else return usersList.get(0);
     }
 }
