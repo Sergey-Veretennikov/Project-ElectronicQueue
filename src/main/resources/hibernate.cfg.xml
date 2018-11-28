@@ -15,7 +15,7 @@
     <property name="current_session_context_class">thread</property>
     <property name="hbm2ddl.auto">update</property>
 
-    <mapping class="queue.main.db.pojo.Operator"/>
+      <!--<mapping class="queue.main.db.pojo.Operator"/>-->
     <!--<mapping class="queue.main.db.pojo.Administrator"/>-->
     <!--<mapping class="queue.main.db.pojo.Category"/>-->
     <!--<mapping class="queue.main.db.pojo.Chief"/>-->

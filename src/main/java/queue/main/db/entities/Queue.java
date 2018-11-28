@@ -2,43 +2,68 @@ package queue.main.db.entities;
 
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
 
 @Entity
-public class Queue{
+@Table(name = "queue")
+public class Queue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "queueID")
+    @Column(name = "queue_id")
     private Integer queueID;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_operator_id", unique = true, nullable = false)
+    private Users users;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "window_id", unique = true, nullable = false)
+    private Window window;
+
+    /* @OneToMany(mappedBy = "queue")
+     private List<Users> users;*/
+/*
     @OneToMany(mappedBy = "queue")
-    private List<Users> users;
-    @OneToMany(mappedBy = "queue")
-    private List<Window> windows;
-    @OneToMany(mappedBy = "queue")
-    private List<Service> services;
+    private List<Service> services;*/
+
 
     public Queue() {
+    }
+
+    public Queue(Users users) {
+        this.users = users;
     }
 
     public Integer getQueueID() {
         return queueID;
     }
 
-    public List<Users> getUsers() {
+    public void setQueueID(Integer queueID) {
+        this.queueID = queueID;
+    }
+
+    public Users getUsers() {
         return users;
     }
 
-    public List<Window> getWindows() {
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    /*   public List<Users> getUsers() {
+        return users;
+    }*/
+
+ /*   public List<Window> getWindows() {
         return windows;
     }
 
     public List<Service> getServices() {
         return services;
-    }
+    }*/
 
-    @Override
+/*    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -47,9 +72,9 @@ public class Queue{
                 Objects.equals(users, queue.users) &&
                 Objects.equals(windows, queue.windows) &&
                 Objects.equals(services, queue.services);
-    }
+    }*/
 
-    @Override
+ /*   @Override
     public int hashCode() {
         return Objects.hash(queueID, users, windows, services);
     }
@@ -62,6 +87,6 @@ public class Queue{
                 ", windows=" + windows +
                 ", services=" + services +
                 '}';
-    }
+    }*/
 
 }

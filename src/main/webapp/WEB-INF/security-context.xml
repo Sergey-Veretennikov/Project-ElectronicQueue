@@ -12,7 +12,10 @@
     <http auto-config="true">
         <csrf disabled="true"/>
         <intercept-url pattern="/guest**" access="hasRole('ROLE_GUEST')"/>
-        <intercept-url pattern="/operator**" access="hasRole('ROLE_OPERATOR')"/>
+        <intercept-url pattern="/operator**" access="hasRole('ROLE_OPERATOR_1')"/>
+        <intercept-url pattern="/operator**" access="hasRole('ROLE_OPERATOR_2')"/>
+        <intercept-url pattern="/operator**" access="hasRole('ROLE_OPERATOR_3')"/>
+        <intercept-url pattern="/operator**" access="hasRole('ROLE_OPERATOR_4')"/>
         <intercept-url pattern="/head**" access="hasRole('ROLE_HEAD_OPERATOR')"/>
         <intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')"/>
         <!-- <intercept-url pattern="/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>-->
@@ -25,32 +28,32 @@
         <logout logout-url="/static/j_spring_security_logout"/>
     </http>
 
-    <authentication-manager>
-            <authentication-provider>
-                <user-service>
-                    <user name="admin@ru" password="1" authorities="ROLE_ADMIN"/>
-                    <user name="user@ru" password="1" authorities="ROLE_USER"/>
-                    <user name="operator@ru" password="1" authorities="ROLE_OPERATOR"/>
-                    <user name="head@ru" password="1" authorities="ROLE_HEAD_OPERATOR"/>
-                </user-service>
-            </authentication-provider>
-    </authentication-manager>
+    <!-- <authentication-manager>
+             <authentication-provider>
+                 <user-service>
+                     <user name="admin@ru" password="1" authorities="ROLE_ADMIN"/>
+                     <user name="user@ru" password="1" authorities="ROLE_USER"/>
+                     <user name="operator@ru" password="1" authorities="ROLE_OPERATOR"/>
+                     <user name="head@ru" password="1" authorities="ROLE_HEAD_OPERATOR"/>
+                 </user-service>
+             </authentication-provider>
+     </authentication-manager>-->
 
     <beans:bean name="passwordEncoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
-    <!--<authentication-manager>
+    <authentication-manager>
         <authentication-provider>
             <password-encoder ref="passwordEncoder"/>
             <jdbc-user-service data-source-ref="dataSource"
                                users-by-username-query=
-                                       'SELECT login, password, "isActive" FROM users WHERE login=?'
+                                       "SELECT login, password, is_active FROM users WHERE login=?"
                                authorities-by-username-query=
-                                       'SELECT u.login, r."roleName" FROM users u, "usersRole" uR, role r
-                                        WHERE u."usersID" = uR."usersID"
-                                        AND r."roleID" = uR."roleID" AND u.login =?'/>
+                                       "SELECT u.login, r.role_name FROM users u, users_role uR, role r
+                                        WHERE u.users_id = uR.users_id
+                                        AND r.role_id = uR.role_id AND u.login =?"/>
 
         </authentication-provider>
-    </authentication-manager>-->
+    </authentication-manager>
 
 </beans:beans>

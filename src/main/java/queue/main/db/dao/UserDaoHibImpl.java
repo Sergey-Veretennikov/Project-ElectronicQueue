@@ -1,11 +1,17 @@
 package queue.main.db.dao;
 
+
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import queue.main.db.entities.Role;
+import queue.main.db.entities.Users;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
+
 @Repository
 public class UserDaoHibImpl implements UserDaoHib {
 
@@ -29,7 +35,7 @@ public class UserDaoHibImpl implements UserDaoHib {
     @Override
     @Transactional
     public Object getById(Integer userId, Class<?> t) {
-        Object obj =  sessionFactory.getCurrentSession().get(t, userId);
+        Object obj = sessionFactory.getCurrentSession().get(t, userId);
         return obj;
     }
 
@@ -44,5 +50,29 @@ public class UserDaoHibImpl implements UserDaoHib {
     @Transactional
     public void delete(Object user) {
         sessionFactory.getCurrentSession().delete(user);
+    }
+
+    @Override
+    public void addUsers(Users user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(user);
+    }
+
+    @Override
+    public Role getRole(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Role.class, id);
+    }
+
+    @Override
+    public Users getUser(String login) {
+        Session session = sessionFactory.getCurrentSession();
+        List<Users> usersList;
+        usersList = session.createQuery("from Users where login=: login")
+                .setParameter("login", login).list();
+
+        if (usersList.isEmpty()) {
+            return null;
+        } else return usersList.get(0);
     }
 }

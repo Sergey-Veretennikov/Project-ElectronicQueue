@@ -1,5 +1,6 @@
 package queue.main.service;
 
 public interface UserService {
-    void addUser(String login, String password, String role);
+    boolean addUser(String name, String surname, String dateofBirth, String contact, String login, String password,
+                    String role, String isActive);
 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet id="2018-11-05-data_insert_table" author="kashenkov">
+        <insert tableName="role">
+            <column name="role_id" value="1"/>
+            <column name="role_name" value="ROLE_GUEST"/>
+        </insert>
+        <insert tableName="role">
+            <column name="role_id" value="2"/>
+            <column name="role_name" value="ROLE_OPERATOR_1"/>
+        </insert>
+        <insert tableName="role">
+            <column name="role_id" value="3"/>
+            <column name="role_name" value="ROLE_OPERATOR_2"/>
+        </insert>
+        <insert tableName="role">
+            <column name="role_id" value="4"/>
+            <column name="role_name" value="ROLE_OPERATOR_3"/>
+        </insert>
+        <insert tableName="role">
+            <column name="role_id" value="5"/>
+            <column name="role_name" value="ROLE_OPERATOR_4"/>
+        </insert>
+        <insert tableName="role">
+            <column name="role_id" value="6"/>
+            <column name="role_name" value="ROLE_HEAD_OPERATOR"/>
+        </insert>
+        <insert tableName="role">
+            <column name="role_id" value="7"/>
+            <column name="role_name" value="ROLE_ADMIN"/>
+        </insert>
+
+
+        <!-- <insert tableName="window">
+             <column name="number_window" value="1"/>
+             <column name="id_operator" value="1"/>
+             <column name="id_queue" value="1"/>
+         </insert>
+         <insert tableName="queue">
+             <column name="client_id" value="1"/>
+             <column name="number_window" value="1"/>
+             <column name="number_service" value="1"/>
+         </insert>
+         <insert tableName="service">
+             <column name="service_id" value="1"/>
+             <column name="name_service" value="1"/>
+             <column name="average_lead_time" value="1"/>
+             <column name="operator_id" value="1"/>
+         </insert>
+         <insert tableName="category_service">
+             <column name="category_id" value="1"/>
+             <column name="name_category" value="1"/>
+             <column name="service_id" value="1"/>
+         </insert>
+         <insert tableName="administrator">
+             <column name="administrator_id" value="1"/>
+             <column name="name_administrator" value="1"/>
+             <column name="login" value="1"/>
+             <column name="password" value="1"/>
+             <column name="role" value="1"/>
+             <column name="age" value="55"/>
+             <column name="contact" value="1"/>
+             <column name="operator_id" value="1"/>
+         </insert>
+         <insert tableName="chief">
+             <column name="chief_id" value="1"/>
+             <column name="name_chief" value="1"/>
+             <column name="login" value="1"/>
+             <column name="password" value="1"/>
+             <column name="role" value="1"/>
+             <column name="contact" value="1"/>
+             <column name="operator_id" value="1"/>
+             <column name="administrator_id" value="1"/>
+             <column name="service_id" value="1"/>
+             <column name="category_id" value="1"/>
+             <column name="queue_id" value="1"/>
+         </insert>-->
+    </changeSet>
+</databaseChangeLog>

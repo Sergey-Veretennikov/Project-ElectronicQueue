@@ -1,45 +1,58 @@
 package queue.main.db.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "usersID")
+    @Column(name = "users_id", unique = true, nullable = false)
     private Integer userID;
-    @Basic
+
+    @Column(name = "login", unique = true, nullable = false)
     private String login;
-    @Basic
+
+    @Column(name = "password", unique = true, nullable = false)
     private String password;
-    @Basic
+
+    @Column(name = "is_active", nullable = false)
     private Boolean isActive;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userInfoID")
+    @JoinColumn(name = "user_info_id")
     private UserInfo userInfo;
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "usersRole",
-            joinColumns = @JoinColumn (name ="usersID"),
-            inverseJoinColumns = @JoinColumn(name = "roleID"))
-    private List<Role> roles = new ArrayList<>();
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    private Queue queue;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinTable(name = "users_role",
+            joinColumns = @JoinColumn(name = "users_id", nullable = false, updatable = false),
+            inverseJoinColumns = @JoinColumn(name = "role_id", nullable = false, updatable = false))
+    private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private Set<Queue> queues = new HashSet<>();
 
     public Users() {
     }
 
-    public Users(String login, String password, Boolean isActive) {
+    public Users(String login, String password, Boolean isActive, UserInfo userInfo, Role role) {
         this.login = login;
         this.password = password;
         this.isActive = isActive;
+        this.userInfo = userInfo;
+        this.roles.add(role);
     }
 
     public Integer getUserID() {
         return userID;
+    }
+
+    public void setUserID(Integer userID) {
+        this.userID = userID;
     }
 
     public String getLogin() {
@@ -74,12 +87,20 @@ public class Users {
         this.userInfo = userInfo;
     }
 
-    public Queue getQueue() {
-        return queue;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Set<Queue> getQueue() {
+        return queues;
+    }
+
+    public void setQueue(Set<Queue> queue) {
+        this.queues = queues;
     }
 
     @Override
@@ -91,7 +112,7 @@ public class Users {
                 ", isActive=" + isActive +
                 ", userInfo=" + userInfo +
                 ", roles=" + roles +
-                ", queue=" + queue +
+                ", queue=" + queues +
                 '}';
     }
 
@@ -106,12 +127,11 @@ public class Users {
                 Objects.equals(isActive, users.isActive) &&
                 Objects.equals(userInfo, users.userInfo) &&
                 Objects.equals(roles, users.roles) &&
-                Objects.equals(queue, users.queue);
+                Objects.equals(queues, users.queues);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userID, login, password, isActive, userInfo, roles, queue);
+        return Objects.hash(userID, login, password, isActive, userInfo, roles, queues);
     }
-
 }

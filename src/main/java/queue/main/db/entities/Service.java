@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
+//@Entity
 public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "serviceID")
+    @Column(name = "service_id")
     private Integer serviceID;
     @Basic
     private String serviceName;

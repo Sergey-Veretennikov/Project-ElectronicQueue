@@ -2,19 +2,23 @@ package queue.main.db.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "windows")
 public class Window implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "windowsID")
+    @Column(name = "window_id")
     private Integer windowID;
-    @Basic
+
+    @Column(name = "name")
     private String name;
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    private Queue queue;
+
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private Set<Queue> queues = new HashSet<>();
 
     public Window() {
     }
