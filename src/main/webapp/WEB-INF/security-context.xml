@@ -24,7 +24,8 @@
                     password-parameter="j_password"
                     login-page="/login"
 
-                    authentication-failure-url="/login?error=login"/>
+                    authentication-failure-url="/login?error=login"
+                    authentication-success-handler-ref="authenticationSuccessHandler"/>
         <logout logout-url="/static/j_spring_security_logout"/>
     </http>
 
@@ -41,6 +42,7 @@
 
     <beans:bean name="passwordEncoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    <beans:bean id="authenticationSuccessHandler" class="queue.main.controller.QeueuAuthenticationSuccessHandler"/>
 
     <authentication-manager>
         <authentication-provider>
