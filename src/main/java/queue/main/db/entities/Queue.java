@@ -4,6 +4,7 @@ package queue.main.db.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "queue")
 public class Queue {
 
     @Id
@@ -16,10 +17,13 @@ public class Queue {
     @JoinColumn(name = "users_operator_id", unique = true, nullable = false)
     private Users users;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "window_id", unique = true, nullable = false)
+    private Window window;
+
     /* @OneToMany(mappedBy = "queue")
      private List<Users> users;*/
-/*    @OneToMany(mappedBy = "queue")
-    private List<Window> windows;
+/*
     @OneToMany(mappedBy = "queue")
     private List<Service> services;*/
 

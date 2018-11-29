@@ -14,9 +14,9 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/MyTestBase"/>
-        <property name="username" value="baseWatcher"/>
-        <property name="password" value="sa"/>
+        <property name="url" value="#{systemEnvironment['URL']}"/>
+           <property name="username" value="#{systemEnvironment['DATABASE_USER']}"/>
+        <property name="password" value="#{systemEnvironment['DATABASE_PASSWORD']}"/>
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
