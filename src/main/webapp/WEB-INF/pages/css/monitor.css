@@ -1,0 +1,25 @@
+.magenta {
+	background-color: rgb(127,200,200);
+}
+
+.roundBorder{
+	border-radius: 3px;
+}
+
+.centered {
+	text-align: center;
+}
+
+.queueContainer {
+	height: 200px;
+	width: calc(100% / 2);
+	display: inline-block;
+}
+
+.receipNumber {
+	
+}
+
+.windowNumber {
+	
+}

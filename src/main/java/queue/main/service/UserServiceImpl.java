@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+
     public boolean addUser(String name, String surname, String dateofBirth, String contact, String login, String password,
                            String idRole, String isActive) {
         String cryptPassword = bCryptPasswordEncoder.encode(password);
@@ -55,5 +55,17 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         return parsed;
+    }
+
+    @Override
+    @Transactional
+    public Object getUser(Integer id, Class<?> t) {
+        return userDaoHib.getById(id,t);
+    }
+
+    @Override
+    @Transactional
+    public Object getUser(String login) {
+        return userDaoHib.getUser(login);
     }
 }

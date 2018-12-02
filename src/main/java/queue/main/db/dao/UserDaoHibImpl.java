@@ -53,24 +53,25 @@ public class UserDaoHibImpl implements UserDaoHib {
     }
 
     @Override
+    @Transactional
     public void addUsers(Users user) {
         Session session = sessionFactory.getCurrentSession();
         session.save(user);
     }
 
     @Override
+    @Transactional
     public Role getRole(Integer id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Role.class, id);
     }
 
     @Override
+    @Transactional
     public Users getUser(String login) {
-        Session session = sessionFactory.getCurrentSession();
-        List<Users> usersList;
-        usersList = session.createQuery("from Users where login=: login")
-                .setParameter("login", login).list();
 
+        List<Users> usersList = sessionFactory.getCurrentSession().createQuery("FROM Users where login=: login")
+                .setParameter("login", login).list();
         if (usersList.isEmpty()) {
             return null;
         } else return usersList.get(0);

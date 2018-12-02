@@ -4,6 +4,12 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <include file="2018_11_25_create_corrected_table.xml" relativeToChangelogFile="true"/>
-    <include file="2018_11_30_update_table_queue_window.xml" relativeToChangelogFile="true"/>
+    <changeSet id="2018-11-30-update-table-queue-windows" author="kashenkovsv">
+        <addColumn tableName="queue">
+            <column name="done" type="boolean"/>
+        </addColumn>
+        <addColumn tableName="windows">
+            <column name="work" type="boolean"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
