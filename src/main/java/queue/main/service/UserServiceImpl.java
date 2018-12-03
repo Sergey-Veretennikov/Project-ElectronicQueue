@@ -1,9 +1,11 @@
 package queue.main.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import queue.main.db.dao.UserDaoHib;
+import queue.main.db.dao.common.ICrudTemplateService;
+import queue.main.db.entities.Role;
 import queue.main.db.entities.UserInfo;
 import queue.main.db.entities.Users;
 
@@ -11,12 +13,15 @@ import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    // private UserDao userDao;
-    private UserDaoHib userDaoHib;
+
+
+    private ICrudTemplateService<Users> userDaoHib;
+    private ICrudTemplateService<Role> roleDaoHib;
 
     @Autowired
     public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -24,23 +29,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Autowired
-    public void setUserDaoHib(UserDaoHib userDaoHib) {
+    @Qualifier("UserDaoHibImpl")
+    public void setUserDaoHib(ICrudTemplateService<Users> userDaoHib) {
         this.userDaoHib = userDaoHib;
     }
 
-    @Override
+    @Autowired
+    @Qualifier("RoleDaoHibImpl")
+    public void setRoleDaoHib(ICrudTemplateService<Role> roleDaoHib) {
+        this.roleDaoHib = roleDaoHib;
+    }
 
+    @Override
     public boolean addUser(String name, String surname, String dateofBirth, String contact, String login, String password,
                            String idRole, String isActive) {
         String cryptPassword = bCryptPasswordEncoder.encode(password);
 
-        Users users = userDaoHib.getUser(login);
+        List<Users> users = userDaoHib.getByCriteria("login", login);
 
-        if (users == null) {
-            users = new Users(login, cryptPassword, "true".equals(isActive)
+        if (users == null || users.size() == 0) {
+            Users newUser = new Users(login, cryptPassword, "true".equals(isActive)
                     , new UserInfo(name, surname, convertStringToDate(dateofBirth), contact)
-                    , userDaoHib.getRole(Integer.valueOf(idRole)));
-            userDaoHib.addUsers(users);
+                    , roleDaoHib.getById(Integer.parseInt(idRole, 10)));
+            userDaoHib.add(newUser);
             return true;
         }
         return false;
@@ -59,13 +70,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Object getUser(Integer id, Class<?> t) {
-        return userDaoHib.getById(id,t);
+    public Users getUser(Integer id) {
+        return userDaoHib.getById(id);
     }
 
     @Override
     @Transactional
-    public Object getUser(String login) {
-        return userDaoHib.getUser(login);
+    public Users getUser(String login) {
+        List<Users> result = userDaoHib.getByCriteria("login", login);
+        if (result != null || result.size() > 0) {
+            return result.get(0);
+        }
+        return null;
     }
 }
