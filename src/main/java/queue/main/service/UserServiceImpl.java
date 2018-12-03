@@ -34,13 +34,16 @@ public class UserServiceImpl implements UserService {
         this.userDaoHib = userDaoHib;
     }
 
+
     @Autowired
     @Qualifier("RoleDaoHibImpl")
     public void setRoleDaoHib(ICrudHibernateContainer<Role> roleDaoHib) {
         this.roleDaoHib = roleDaoHib;
     }
 
+
     @Override
+    @Transactional
     public boolean addUser(String name, String surname, String dateofBirth, String contact, String login, String password,
                            String idRole, String isActive) {
         String cryptPassword = bCryptPasswordEncoder.encode(password);
