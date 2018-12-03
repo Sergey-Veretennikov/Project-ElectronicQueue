@@ -3,7 +3,6 @@ package queue.main.db.dao.common;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import queue.main.utils.GenericClass;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -45,7 +44,7 @@ public abstract class AbstractCrudTemplateService<T> implements  ICrudTemplateSe
 
     @Transactional
     public T getById(Integer entityId) {
-        T obj =  getCurrentSession().get(classOfEntity.getEntityType(),entityId);
+        T obj =  getCurrentSession().get(classOfEntity,entityId);
         return obj;
     }
 
