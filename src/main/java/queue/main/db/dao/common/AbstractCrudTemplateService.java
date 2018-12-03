@@ -14,10 +14,10 @@ import java.util.List;
 
 public abstract class AbstractCrudTemplateService<T> implements  ICrudTemplateService<T>{
 
-    private GenericClass<T> classOfEntity;
+    private final Class<T> classOfEntity;
 
     public AbstractCrudTemplateService(Class<T> classOfEntity) {
-        this.classOfEntity = new GenericClass(classOfEntity);
+        this.classOfEntity = classOfEntity;
     }
 
     @Autowired
@@ -67,8 +67,8 @@ public abstract class AbstractCrudTemplateService<T> implements  ICrudTemplateSe
     @Transactional
     public List<T> getByCriteria(String propName, String val){
         CriteriaBuilder criteriaBuilder = getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery= criteriaBuilder.createQuery(classOfEntity.getEntityType());
-        Root<T> likeRoot = criteriaQuery.from(classOfEntity.getEntityType());
+        CriteriaQuery<T> criteriaQuery= criteriaBuilder.createQuery(classOfEntity);
+        Root<T> likeRoot = criteriaQuery.from(classOfEntity);
         criteriaQuery.where(criteriaBuilder.like(likeRoot.get(propName),val));
         return getCurrentSession().createQuery(criteriaQuery).getResultList();
     }
