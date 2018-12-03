@@ -11,11 +11,11 @@ import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public abstract class AbstractCrudTemplateService<T> implements  ICrudTemplateService<T>{
+public abstract class AbstractCrudDaoHib<T> implements  ICrudTemplateService<T>{
 
     private final Class<T> classOfEntity;
 
-    public AbstractCrudTemplateService(Class<T> classOfEntity) {
+    public AbstractCrudDaoHib(Class<T> classOfEntity) {
         this.classOfEntity = classOfEntity;
     }
 

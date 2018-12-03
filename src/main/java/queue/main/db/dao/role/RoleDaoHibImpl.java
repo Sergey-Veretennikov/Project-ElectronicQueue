@@ -2,14 +2,13 @@ package queue.main.db.dao.role;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import queue.main.db.dao.common.AbstractCrudTemplateService;
+import queue.main.db.dao.common.AbstractCrudDaoHib;
 import queue.main.db.entities.Role;
-import queue.main.db.entities.Users;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 @Repository
 @Qualifier("RoleDaoHibImpl")
-public class RoleDaoHibImpl extends AbstractCrudTemplateService<Role> {
+public class RoleDaoHibImpl extends AbstractCrudDaoHib<Role> {
     private final String tableName = "role";
 
     public RoleDaoHibImpl() {
