@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public abstract class AbstractCrudDaoHib<T> implements  ICrudTemplateService<T>{
+public abstract class AbstractCrudDaoHib<T> implements ICrudHibernateContainer<T> {
 
     private final Class<T> classOfEntity;
 

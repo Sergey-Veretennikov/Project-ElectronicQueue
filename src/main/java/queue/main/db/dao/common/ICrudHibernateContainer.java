@@ -2,7 +2,7 @@ package queue.main.db.dao.common;
 
 import java.util.List;
 
-public interface ICrudTemplateService<T> {
+public interface ICrudHibernateContainer<T> {
 
     Integer add(T entity) ;
     void update(T entity);

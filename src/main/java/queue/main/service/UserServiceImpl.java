@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import queue.main.db.dao.common.ICrudTemplateService;
+import queue.main.db.dao.common.ICrudHibernateContainer;
 import queue.main.db.entities.Role;
 import queue.main.db.entities.UserInfo;
 import queue.main.db.entities.Users;
@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    private ICrudTemplateService<Users> userDaoHib;
-    private ICrudTemplateService<Role> roleDaoHib;
+    private ICrudHibernateContainer<Users> userDaoHib;
+    private ICrudHibernateContainer<Role> roleDaoHib;
 
     @Autowired
     public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -30,13 +30,13 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     @Qualifier("UserDaoHibImpl")
-    public void setUserDaoHib(ICrudTemplateService<Users> userDaoHib) {
+    public void setUserDaoHib(ICrudHibernateContainer<Users> userDaoHib) {
         this.userDaoHib = userDaoHib;
     }
 
     @Autowired
     @Qualifier("RoleDaoHibImpl")
-    public void setRoleDaoHib(ICrudTemplateService<Role> roleDaoHib) {
+    public void setRoleDaoHib(ICrudHibernateContainer<Role> roleDaoHib) {
         this.roleDaoHib = roleDaoHib;
     }
 
