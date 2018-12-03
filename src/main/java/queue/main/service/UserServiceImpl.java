@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-
+    @Transactional
     public boolean addUser(String name, String surname, String dateofBirth, String contact, String login, String password,
                            String idRole, String isActive) {
         String cryptPassword = bCryptPasswordEncoder.encode(password);
