@@ -1,22 +1,27 @@
-package queue.main.service.user;
+package queue.main.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import queue.main.db.dao.common.ICrudTemplateService;
+import queue.main.db.dao.common.ICrudHibernateContainer;
 import queue.main.db.entities.Role;
 import queue.main.db.entities.UserInfo;
 import queue.main.db.entities.Users;
 
+import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    private ICrudTemplateService<Users> userDaoHib;
+
+
+    private ICrudHibernateContainer<Users> userDaoHib;
+    private ICrudHibernateContainer<Role> roleDaoHib;
 
     @Autowired
     public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -25,27 +30,60 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     @Qualifier("UserDaoHibImpl")
-    public void setUserDaoHib(ICrudTemplateService<Users> userDaoHib) {
+    public void setUserDaoHib(ICrudHibernateContainer<Users> userDaoHib) {
         this.userDaoHib = userDaoHib;
     }
 
+
+    @Autowired
+    @Qualifier("RoleDaoHibImpl")
+    public void setRoleDaoHib(ICrudHibernateContainer<Role> roleDaoHib) {
+        this.roleDaoHib = roleDaoHib;
+    }
+
+
     @Override
+    @Transactional
     public boolean addUser(String name, String surname, String dateofBirth, String contact, String login, String password,
-                        String role, String isActive) {
+                           String idRole, String isActive) {
         String cryptPassword = bCryptPasswordEncoder.encode(password);
 
+        List<Users> users = userDaoHib.getByCriteria("login", login);
+
+        if (users == null || users.size() == 0) {
+            Users newUser = new Users(login, cryptPassword, "true".equals(isActive)
+                    , new UserInfo(name, surname, convertStringToDate(dateofBirth), contact)
+                    , roleDaoHib.getById(Integer.parseInt(idRole, 10)));
+            userDaoHib.add(newUser);
+            return true;
+        }
+        return false;
+    }
+
+    private Date convertStringToDate(String stringDate) {
         Date parsed = null;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            parsed = format.parse(dateofBirth);
+            parsed = format.parse(stringDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return parsed;
+    }
 
-        Users users = new Users(login, cryptPassword, isActive.equals("true"),
-                new UserInfo(name, surname, parsed, contact), new Role(role));
-        userDaoHib.add(users);
+    @Override
+    @Transactional
+    public Users getUser(Integer id) {
+        return userDaoHib.getById(id);
+    }
 
-        return true;
+    @Override
+    @Transactional
+    public Users getUser(String login) {
+        List<Users> result = userDaoHib.getByCriteria("login", login);
+        if (result != null || result.size() > 0) {
+            return result.get(0);
+        }
+        return null;
     }
 }

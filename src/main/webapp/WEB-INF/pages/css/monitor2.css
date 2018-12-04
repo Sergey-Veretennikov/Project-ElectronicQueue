@@ -1,0 +1,34 @@
+.monitorHeader {
+	height: 30px;
+	width: calc(100% / 2);
+	display: inline-block;
+}
+
+.queueContainer {
+	height: 100px;
+	width: calc(100% / 2);
+	display: inline-block;
+}
+
+.queueItem {
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	height:100%;
+}
+
+.queueItemContent{
+	border:1px solid black;
+	border-radius:5px;
+	height:100%;
+	background-color: rgb(127,200,200);
+}
+
+.Hсentered {
+	text-align:center;
+}
+.Vcentered{
+	vertical-align:middle;	
+}
+

@@ -27,6 +27,8 @@ public class Queue {
     @OneToMany(mappedBy = "queue")
     private List<Service> services;*/
 
+    @Column(name = "done")
+    private Boolean done;
 
     public Queue() {
     }
@@ -49,6 +51,14 @@ public class Queue {
 
     public void setUsers(Users users) {
         this.users = users;
+    }
+
+    public Boolean getDone() {
+        return done;
+    }
+
+    public void setDone(Boolean done) {
+        this.done = done;
     }
 
     /*   public List<Users> getUsers() {

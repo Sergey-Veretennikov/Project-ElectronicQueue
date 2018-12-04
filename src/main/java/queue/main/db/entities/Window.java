@@ -17,6 +17,9 @@ public class Window implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "work")
+    private Boolean work;
+
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private Set<Queue> queues = new HashSet<>();
 
@@ -39,25 +42,37 @@ public class Window implements Serializable {
         return windowID;
     }
 
+    public Boolean getWork() {
+        return work;
+    }
+
+    public void setWork(Boolean work) {
+        this.work = work;
+    }
+
+    @Override
+    public String toString() {
+        return "Window{" +
+                "windowID=" + windowID +
+                ", name='" + name + '\'' +
+                ", work=" + work +
+                ", queues=" + queues +
+                '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Window window = (Window) o;
         return Objects.equals(windowID, window.windowID) &&
-                Objects.equals(name, window.name);
+                Objects.equals(name, window.name) &&
+                Objects.equals(work, window.work) &&
+                Objects.equals(queues, window.queues);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(windowID, name);
-    }
-
-    @Override
-    public String toString() {
-        return "Windows{" +
-                "windowsID=" + windowID +
-                ", name='" + name + '\'' +
-                '}';
+        return Objects.hash(windowID, name, work, queues);
     }
 }
