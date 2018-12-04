@@ -1,4 +1,4 @@
-package queue.main.service;
+package queue.main.service.user;
 
 import queue.main.db.entities.Users;
 

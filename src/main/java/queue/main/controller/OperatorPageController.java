@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import queue.main.db.entities.UserInfo;
 import queue.main.db.entities.Users;
-import queue.main.service.UserService;
+import queue.main.service.user.UserService;
 
 import java.security.Principal;
 

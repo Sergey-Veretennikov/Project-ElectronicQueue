@@ -1,4 +1,4 @@
-package queue.main.service;
+package queue.main.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
