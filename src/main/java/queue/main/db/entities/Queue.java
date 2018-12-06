@@ -2,6 +2,8 @@ package queue.main.db.entities;
 
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "queue")
@@ -23,9 +25,9 @@ public class Queue {
 
     /* @OneToMany(mappedBy = "queue")
      private List<Users> users;*/
-/*
-    @OneToMany(mappedBy = "queue")
-    private List<Service> services;*/
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Service> services;
 
     @Column(name = "done")
     private Boolean done;
@@ -67,26 +69,26 @@ public class Queue {
 
  /*   public List<Window> getWindows() {
         return windows;
-    }
+    }*/
 
     public List<Service> getServices() {
         return services;
-    }*/
+    }
 
-/*    @Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Queue queue = (Queue) o;
         return Objects.equals(queueID, queue.queueID) &&
                 Objects.equals(users, queue.users) &&
-                Objects.equals(windows, queue.windows) &&
+                //Objects.equals(windows, queue.windows) &&
                 Objects.equals(services, queue.services);
-    }*/
+    }
 
- /*   @Override
+    @Override
     public int hashCode() {
-        return Objects.hash(queueID, users, windows, services);
+        return Objects.hash(queueID, users, /*windows,*/ services);
     }
 
     @Override
@@ -94,9 +96,9 @@ public class Queue {
         return "Queue{" +
                 "queueID=" + queueID +
                 ", users=" + users +
-                ", windows=" + windows +
+                //", windows=" + windows +
                 ", services=" + services +
                 '}';
-    }*/
+    }
 
 }

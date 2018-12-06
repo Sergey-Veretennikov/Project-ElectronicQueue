@@ -12,5 +12,6 @@
 </head>
 <body>
 Page for Guest
+size == ${services.size()}
 </body>
 </html>

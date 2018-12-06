@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-//@Entity
+@Entity
 public class Permission {
 
     @Id
@@ -19,8 +19,8 @@ public class Permission {
             joinColumns = @JoinColumn(name = "permission_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    private Service service;
+    /*@ManyToOne(optional = false, cascade = CascadeType.ALL)
+    private Service service;*/
 
     public Permission() {
     }
@@ -51,7 +51,7 @@ public class Permission {
                 "permissionID=" + permissionID +
                 ", permissionName='" + permissionName + '\'' +
                 ", roles=" + roles +
-                ", service=" + service +
+                //", service=" + service +
                 '}';
     }
 
@@ -62,12 +62,12 @@ public class Permission {
         Permission that = (Permission) o;
         return Objects.equals(permissionID, that.permissionID) &&
                 Objects.equals(permissionName, that.permissionName) &&
-                Objects.equals(roles, that.roles) &&
-                Objects.equals(service, that.service);
+                Objects.equals(roles, that.roles);// &&
+                //Objects.equals(service, that.service);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(permissionID, permissionName, roles, service);
+        return Objects.hash(permissionID, permissionName, roles/*, service*/);
     }
 }

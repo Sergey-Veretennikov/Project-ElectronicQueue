@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-//@Entity
+@Entity
+@Table(name="service")
 public class Service {
 
     @Id
@@ -12,12 +13,19 @@ public class Service {
     @Column(name = "service_id")
     private Integer serviceID;
     @Basic
+    @Column(name = "service_name")
     private String serviceName;
     @Basic
+    @Column(name="average_lead_time")
     private Integer averageLeadTime;
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    private Queue queue;
-    @OneToMany(mappedBy = "service")
+    //@ManyToOne(optional = false, cascade = CascadeType.ALL)
+    /*@ManyToOne
+    @JoinColumn(name = "person_id",
+            foreignKey = @ForeignKey(name = "PERSON_ID_FK")
+    )
+    private Queue queue;*/
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Permission> permissions;
 
     public Service() {
@@ -26,7 +34,7 @@ public class Service {
     public Service(String serviceName, Integer averageLeadTime, Queue queue) {
         this.serviceName = serviceName;
         this.averageLeadTime = averageLeadTime;
-        this.queue = queue;
+        //this.queue = queue;
     }
 
     public String getServiceName() {
@@ -45,21 +53,21 @@ public class Service {
         this.averageLeadTime = averageLeadTime;
     }
 
-    public Queue getQueue() {
+    /*public Queue getQueue() {
         return queue;
-    }
+    }*/
 
-    public void setQueue(Queue queue) {
+    /*public void setQueue(Queue queue) {
         this.queue = queue;
-    }
+    }*/
 
     public Integer getServiceID() {
         return serviceID;
     }
 
-    public List<Permission> getPermissions() {
+    /*public List<Permission> getPermissions() {
         return permissions;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -67,8 +75,8 @@ public class Service {
                 "serviceID=" + serviceID +
                 ", serviceName='" + serviceName + '\'' +
                 ", averageLeadTime=" + averageLeadTime +
-                ", queue=" + queue +
-                ", permissions=" + permissions +
+                //", queue=" + queue +
+                //", permissions=" + permissions +
                 '}';
     }
 
@@ -79,14 +87,14 @@ public class Service {
         Service service = (Service) o;
         return Objects.equals(serviceID, service.serviceID) &&
                 Objects.equals(serviceName, service.serviceName) &&
-                Objects.equals(averageLeadTime, service.averageLeadTime) &&
-                Objects.equals(queue, service.queue) &&
-                Objects.equals(permissions, service.permissions);
+                Objects.equals(averageLeadTime, service.averageLeadTime);
+                //Objects.equals(queue, service.queue);// &&
+                //Objects.equals(permissions, service.permissions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(serviceID, serviceName, averageLeadTime, queue, permissions);
+        return Objects.hash(serviceID, serviceName, averageLeadTime/*, queue, permissions*/);
     }
 
 }

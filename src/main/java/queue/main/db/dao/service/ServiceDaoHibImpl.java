@@ -9,7 +9,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 @Repository
 @Qualifier("ServiceDaoHibImpl")
 public class ServiceDaoHibImpl extends AbstractCrudDaoHib<Service> {
-    private final String tableName = "service";
+    private final String tableName = "Service";
 
     public ServiceDaoHibImpl() {
         super(Service.class);
