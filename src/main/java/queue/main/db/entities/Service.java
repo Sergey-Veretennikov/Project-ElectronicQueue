@@ -25,8 +25,8 @@ public class Service {
     )
     private Queue queue;*/
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Permission> permissions;
+    /*@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Permission> permissions;*/
 
     public Service() {
     }
