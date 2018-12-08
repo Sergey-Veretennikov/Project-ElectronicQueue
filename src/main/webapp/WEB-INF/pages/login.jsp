@@ -14,10 +14,10 @@
     <title>Пожалуйста, войдите</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="http://bootstrap-3.ru/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="http://bootstrap-3.ru/examples/signin/signin.css" rel="stylesheet">
+    <link href="resources/signin.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]>
