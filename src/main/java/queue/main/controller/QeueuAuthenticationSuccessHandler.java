@@ -59,8 +59,7 @@ public class QeueuAuthenticationSuccessHandler implements AuthenticationSuccessH
             } else if ((grantedAuthority.getAuthority().equals("ROLE_OPERATOR_1"))
                     || (grantedAuthority.getAuthority().equals("ROLE_OPERATOR_2"))
                     || (grantedAuthority.getAuthority().equals("ROLE_OPERATOR_3"))
-                    || (grantedAuthority.getAuthority().equals("ROLE_OPERATOR_4")))
-            {
+                    || (grantedAuthority.getAuthority().equals("ROLE_OPERATOR_4"))) {
                 logger.debug("Operator come in");
                 return "/operatorpage.html";
             } else if (grantedAuthority.getAuthority().equals("ROLE_HEAD_OPERATOR")) {
@@ -80,10 +79,11 @@ public class QeueuAuthenticationSuccessHandler implements AuthenticationSuccessH
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
 
-    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
-        this.redirectStrategy = redirectStrategy;
-    }
     protected RedirectStrategy getRedirectStrategy() {
         return redirectStrategy;
+    }
+
+    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
+        this.redirectStrategy = redirectStrategy;
     }
 }

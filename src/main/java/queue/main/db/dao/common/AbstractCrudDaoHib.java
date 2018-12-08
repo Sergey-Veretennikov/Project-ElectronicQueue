@@ -13,20 +13,19 @@ import java.util.List;
 public abstract class AbstractCrudDaoHib<T> implements ICrudHibernateContainer<T> {
 
     private final Class<T> classOfEntity;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public AbstractCrudDaoHib(Class<T> classOfEntity) {
         this.classOfEntity = classOfEntity;
     }
-
-    @Autowired
-    private SessionFactory sessionFactory;
 
     protected SessionFactory getSessionFactory() {
 
         return sessionFactory;
     }
 
-    protected Session getCurrentSession(){
+    protected Session getCurrentSession() {
         return getSessionFactory().getCurrentSession();
     }
 
@@ -43,7 +42,7 @@ public abstract class AbstractCrudDaoHib<T> implements ICrudHibernateContainer<T
 
 
     public T getById(Integer entityId) {
-        T obj =  getCurrentSession().get(classOfEntity,entityId);
+        T obj = getCurrentSession().get(classOfEntity, entityId);
         return obj;
     }
 
@@ -63,11 +62,11 @@ public abstract class AbstractCrudDaoHib<T> implements ICrudHibernateContainer<T
     }
 
 
-    public List<T> getByCriteria(String propName, String val){
+    public List<T> getByCriteria(String propName, String val) {
         CriteriaBuilder criteriaBuilder = getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery= criteriaBuilder.createQuery(classOfEntity);
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(classOfEntity);
         Root<T> likeRoot = criteriaQuery.from(classOfEntity);
-        criteriaQuery.where(criteriaBuilder.like(likeRoot.get(propName),val));
+        criteriaQuery.where(criteriaBuilder.like(likeRoot.get(propName), val));
         return getCurrentSession().createQuery(criteriaQuery).getResultList();
     }
 
