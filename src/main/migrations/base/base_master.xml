@@ -5,5 +5,5 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
     <include file="2018_11_25_create_corrected_table.xml" relativeToChangelogFile="true"/>
-
+    <include file="2018_11_30_update_table_queue_window.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
