@@ -6,18 +6,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import queue.main.db.entities.Queue;
 import queue.main.db.entities.UserInfo;
 import queue.main.db.entities.Users;
 import queue.main.service.UserService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
 public class OperatorPageController {
 
     private Users users;
-
     private UserInfo userInfo;
+    private Queue queue;
+    private Integer count = 0;
 
     @Autowired
     private UserService userService;
@@ -26,28 +30,53 @@ public class OperatorPageController {
     public String showOperatorPage(Model model,
                                    @RequestParam(value = "action", required = false) String action,
                                    Principal principal) {
+//        Если зашли в первый раз после login
         if (users == null) {
             String name = principal.getName();
-            users = (Users) userService.getUser(name);
+            users = userService.getUser(name);
             userInfo = users.getUserInfo();
+            queue = userService.getQueue(false);
         }
         model.addAttribute("userInfo", userInfo);
+        model.addAttribute("admin", " ");
+
+//        Смотрим что пришло от оператора
         switch (action == null ? "info" : action) {
             case "next":
-                System.out.println("Next");
+//                queue = userService.getQueue("false");
+//                userService.add(queue);
+                queue = new Queue();
                 break;
             case "done":
-                System.out.println("Done");
+                count += 1;
+                if(queue != null){
+                    queue.setDone(true);
+//                    userService.updateQueue(queue);
+                }
                 break;
             case "nextWithout":
-                System.out.println("nextWithout");
+//                userService.getQueue(false);
+                queue.setDone(false);
                 break;
             case "callAdmin":
-                System.out.println("Call Admin");
+                model.addAttribute("admin","Администратор позван");
                 break;
         }
+        model.addAttribute("queue",queue);;
+        model.addAttribute("count", count);
         return "operatorpage";
     }
 
-
+    @RequestMapping(value = "/operatorpageajax", method = RequestMethod.GET)
+    public void ajaxUpdate(HttpServletResponse response) throws IOException {
+        response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+        response.setCharacterEncoding("UTF-8");
+        queue = userService.getQueue(false);
+        if (queue != null) {
+            response.getWriter().write("Есть новый посетитель. Нажмите кнопку следующий");
+        }
+        else {
+            response.getWriter().write("Нет новыx посетитель");
+        }
+    }
 }

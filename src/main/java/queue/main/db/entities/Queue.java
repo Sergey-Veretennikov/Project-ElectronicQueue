@@ -23,9 +23,9 @@ public class Queue {
 
     /* @OneToMany(mappedBy = "queue")
      private List<Users> users;*/
-/*
-    @OneToMany(mappedBy = "queue")
-    private List<Service> services;*/
+
+//    @OneToMany(mappedBy = "queue")
+//    private List<Service> services;
 
     @Column(name = "done")
     private Boolean done;

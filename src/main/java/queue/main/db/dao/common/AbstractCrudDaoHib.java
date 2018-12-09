@@ -62,12 +62,17 @@ public abstract class AbstractCrudDaoHib<T> implements ICrudHibernateContainer<T
     }
 
 
-    public List<T> getByCriteria(String propName, String val) {
+    public List<T> getByCriteria(String propName, Object val) {
         CriteriaBuilder criteriaBuilder = getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(classOfEntity);
         Root<T> likeRoot = criteriaQuery.from(classOfEntity);
-        criteriaQuery.where(criteriaBuilder.like(likeRoot.get(propName), val));
+        if (val.getClass().equals(String.class)){
+            criteriaQuery.where(criteriaBuilder.like(likeRoot.get(propName), val.toString()));
+        } else {
+            criteriaQuery.where(criteriaBuilder.equal(likeRoot.get(propName), val));
+        }
         return getCurrentSession().createQuery(criteriaQuery).getResultList();
     }
+
 
 }

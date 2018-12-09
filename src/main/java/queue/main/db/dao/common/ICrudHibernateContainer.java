@@ -14,5 +14,6 @@ public interface ICrudHibernateContainer<T> {
 
     void delete(T entity);
 
-    List<T> getByCriteria(String propName, String val);
+    List<T> getByCriteria(String propName, Object val);
+
 }

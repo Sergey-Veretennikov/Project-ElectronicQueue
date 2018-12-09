@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import queue.main.db.dao.common.ICrudHibernateContainer;
+import queue.main.db.entities.Queue;
 import queue.main.db.entities.Role;
 import queue.main.db.entities.UserInfo;
 import queue.main.db.entities.Users;
@@ -22,6 +23,7 @@ public class UserServiceImpl implements UserService {
 
     private ICrudHibernateContainer<Users> userDaoHib;
     private ICrudHibernateContainer<Role> roleDaoHib;
+    private ICrudHibernateContainer<Queue> queueDaoHib;
 
     @Autowired
     public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -41,6 +43,11 @@ public class UserServiceImpl implements UserService {
         this.roleDaoHib = roleDaoHib;
     }
 
+    @Autowired
+    @Qualifier("QueueDaoHibImpl")
+    public void setQueueDaoHib(ICrudHibernateContainer<Queue> queueDaoHib) {
+        this.queueDaoHib = queueDaoHib;
+    }
 
     @Override
     @Transactional
@@ -85,5 +92,28 @@ public class UserServiceImpl implements UserService {
             return result.get(0);
         }
         return null;
+    }
+
+
+    @Override
+    @Transactional
+    public Queue getQueue(Boolean done) {
+        List<Queue> result = queueDaoHib.getByCriteria("done", done);
+        if (!result.isEmpty()) {
+            return result.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public void updateQueue(Queue queue) {
+        queueDaoHib.update(queue);
+    }
+
+    @Override
+    @Transactional
+    public Integer add(Queue queue) {
+        return queueDaoHib.add(queue);
     }
 }
