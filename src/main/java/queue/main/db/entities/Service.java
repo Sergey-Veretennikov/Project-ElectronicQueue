@@ -4,21 +4,24 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-//@Entity
+@Entity
+@Table(name = "service")
 public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "service_id")
     private Integer serviceID;
-    @Basic
+    @Column(name = "service_name")
     private String serviceName;
-    @Basic
+    @Column(name = "average_lead_time")
     private Integer averageLeadTime;
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "queue_id", unique = true, nullable = false)
     private Queue queue;
     @OneToMany(mappedBy = "service")
     private List<Permission> permissions;
+
 
     public Service() {
     }
@@ -49,16 +52,24 @@ public class Service {
         return queue;
     }
 
-    public void setQueue(Queue queue) {
-        this.queue = queue;
-    }
-
     public Integer getServiceID() {
         return serviceID;
     }
 
     public List<Permission> getPermissions() {
         return permissions;
+    }
+
+    public void setServiceID(Integer serviceID) {
+        this.serviceID = serviceID;
+    }
+
+    public void setQueue(Queue queue) {
+        this.queue = queue;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 
     @Override

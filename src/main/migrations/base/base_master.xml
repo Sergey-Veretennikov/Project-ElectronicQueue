@@ -6,4 +6,5 @@
 
     <include file="2018_11_25_create_corrected_table.xml" relativeToChangelogFile="true"/>
     <include file="2018_11_30_update_table_queue_window.xml" relativeToChangelogFile="true"/>
+    <include file="2018_12_09_update_table_queue_window.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

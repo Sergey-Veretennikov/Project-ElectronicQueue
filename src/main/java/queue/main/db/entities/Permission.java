@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-//@Entity
+@Entity
+@Table(name = "permission")
 public class Permission {
 
     @Id
@@ -19,7 +20,8 @@ public class Permission {
             joinColumns = @JoinColumn(name = "permission_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "service_id", unique = true, nullable = false)
     private Service service;
 
     public Permission() {
@@ -43,6 +45,22 @@ public class Permission {
 
     public List<Role> getRoles() {
         return roles;
+    }
+
+    public void setPermissionID(Integer permissionID) {
+        this.permissionID = permissionID;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public Service getService() {
+        return service;
     }
 
     @Override

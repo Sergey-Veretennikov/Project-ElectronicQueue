@@ -2,6 +2,7 @@ package queue.main.db.entities;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "queue")
@@ -12,7 +13,6 @@ public class Queue {
     @Column(name = "queue_id")
     private Integer queueID;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_operator_id", unique = true, nullable = false)
     private Users users;
@@ -21,11 +21,8 @@ public class Queue {
     @JoinColumn(name = "window_id", unique = true, nullable = false)
     private Window window;
 
-    /* @OneToMany(mappedBy = "queue")
-     private List<Users> users;*/
-
-//    @OneToMany(mappedBy = "queue")
-//    private List<Service> services;
+    @OneToMany(mappedBy = "queue", fetch = FetchType.LAZY)
+    private List<Service> services;
 
     @Column(name = "done")
     private Boolean done;
@@ -61,42 +58,21 @@ public class Queue {
         this.done = done;
     }
 
-    /*   public List<Users> getUsers() {
-        return users;
-    }*/
-
- /*   public List<Window> getWindows() {
-        return windows;
-    }
-
     public List<Service> getServices() {
         return services;
-    }*/
-
-/*    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Queue queue = (Queue) o;
-        return Objects.equals(queueID, queue.queueID) &&
-                Objects.equals(users, queue.users) &&
-                Objects.equals(windows, queue.windows) &&
-                Objects.equals(services, queue.services);
-    }*/
-
- /*   @Override
-    public int hashCode() {
-        return Objects.hash(queueID, users, windows, services);
     }
 
-    @Override
-    public String toString() {
-        return "Queue{" +
-                "queueID=" + queueID +
-                ", users=" + users +
-                ", windows=" + windows +
-                ", services=" + services +
-                '}';
-    }*/
+    public Window getWindow() {
+        return window;
+    }
+
+    public void setWindow(Window window) {
+        this.window = window;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
+    }
+
 
 }
