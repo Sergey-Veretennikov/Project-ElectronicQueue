@@ -1,0 +1,10 @@
+.service-item {
+    float:left;
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.service-item :hover{
+    background: #afb3b9;
+}
+

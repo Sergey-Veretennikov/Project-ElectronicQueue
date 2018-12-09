@@ -26,7 +26,7 @@
     </style>
 </head>
 <body>
-<div class="textTalon">Ваш талон №___
+<div class="textTalon">Ваш талон № ${talonNumber}
 </div>
 <form>
     <input class="btn-block" type="button" value="На главную" onClick='location.href="/terminal"'>
