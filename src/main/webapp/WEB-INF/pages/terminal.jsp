@@ -52,7 +52,7 @@
 <%@include file="../../header.jsp"%>
 <link href="resources/guestpage.css" rel="stylesheet">
 <title>Список услуг</title>
-<<script>
+<script>
 function getQueueNumber(serviceName) {
 var xhr = new XMLHttpRequest();
 
@@ -65,7 +65,7 @@ xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
 xhr.send(body);
 }
-</script>>
+</script>
 </head>
 <body>
 

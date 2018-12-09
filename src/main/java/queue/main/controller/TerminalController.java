@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,11 +36,25 @@ public class TerminalController {
     }
 
     @RequestMapping(value = "/talon", method = RequestMethod.POST)
-    public ModelAndView getQueueNumber(@RequestParam(value = "name", required = true) String name, ModelMap model) {
-        model.addAttribute("serviceName", name);
-        model.addAttribute("talonNumber", talonCounter);
+    public ModelAndView getQueueNumber(@RequestParam(value = "name", required = true) String name/*, ModelMap model*/) {
+        /*model.addAttribute("serviceName", name);
+        model.addAttribute("talonNumber", talonCounter);*/
         talonCounter++;
-        return new ModelAndView("redirect:/sendTalon", model);
+
+        ModelAndView modelAndView =  new ModelAndView("redirect:/getTalon");
+        modelAndView.addObject("serviceName", name);
+        modelAndView.addObject("talonNumber", talonCounter);
+        return modelAndView;
+
+    }
+
+
+    @RequestMapping(value = "/getTalon", method = RequestMethod.GET)
+    public ModelAndView getTalonInfo(@RequestParam(value = "serviceName", required = true) String name,@RequestParam(value = "talonNumber", required = true) Integer counter, Model model) {
+        ModelAndView modelAndView =  new ModelAndView("sendTalon");
+        modelAndView.addObject("serviceName", name);
+        modelAndView.addObject("talonNumber", counter);
+        return modelAndView;
     }
 
 
